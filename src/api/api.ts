@@ -2,9 +2,13 @@ import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse } from "axios"
 import { IAccessor } from "../models/IAccessor"
 import { IRefresher } from "../models/IRefresher"
 import { IUser } from "../models/IUser"
+import { JwtToken } from "../models/JwtToken"
 
 const API_URL: string = "http://localhost:8080"
 const AUTHORIZATION_PREFIX: string = "Bearer "
+const AUTHORIZATION_HEADER: string = "Authorization"
+export const ACCESS_TOKEN: string = "accessToken"
+export const REFRESH_TOKEN: string = "refreshToken"
 
 export const api: AxiosInstance = axios.create({
     baseURL: API_URL
@@ -17,14 +21,15 @@ export const login = (user: IUser): void => {
     api.post<FormData, AxiosResponse<IRefresher>>("/login", formData)
         .then(result => result.data)
         .then(refresher => {
-            localStorage.setItem("refreshToken", refresher.refreshToken)
-            localStorage.setItem("accessToken", refresher.accessToken)
+            localStorage.setItem(REFRESH_TOKEN, refresher.refreshToken)
+            localStorage.setItem(ACCESS_TOKEN, refresher.accessToken)
         })
 }
 
 api.interceptors.request.use((config: AxiosRequestConfig): AxiosRequestConfig => {
-    if (config.headers) {
-        config.headers.Authorization = `${AUTHORIZATION_PREFIX}${localStorage.getItem("accessToken")}`
+    const accessToken = localStorage.getItem(ACCESS_TOKEN) as JwtToken
+    if (config.headers && accessToken) {
+        config.headers[AUTHORIZATION_HEADER] = `${AUTHORIZATION_PREFIX}${accessToken}`
     }
     return config
 })
@@ -33,20 +38,21 @@ api.interceptors.response.use(
     result => result,
     async (error) => {
         const originalRequest = error.config
-        console.log(originalRequest)
-        console.log(originalRequest.url)
         if (error.response.status === 401 && originalRequest.url === "/refresh") {
-            localStorage.clear()
+            localStorage.removeItem(REFRESH_TOKEN)
+            localStorage.removeItem(ACCESS_TOKEN)
             return Promise.reject(error)
         } else if (error.response.status === 401 && !originalRequest._retry) {
+            localStorage.removeItem(ACCESS_TOKEN)
             originalRequest._retry = true
-            const accessor = await axios.get<IAccessor>(`${API_URL}/refresh`, {
+            const refreshToken: JwtToken = localStorage.getItem(REFRESH_TOKEN) as JwtToken
+            const accessor: IAccessor = await api.get<IAccessor>("/refresh", {
                 headers: {
-                    "Authorization": `${AUTHORIZATION_PREFIX}${localStorage.getItem("refreshToken")}`
+                    [AUTHORIZATION_HEADER]: `${AUTHORIZATION_PREFIX}${refreshToken}`
                 }
             })
                 .then(result => result.data)
-            localStorage.setItem("accessToken", accessor.accessToken)
+            localStorage.setItem(ACCESS_TOKEN, accessor.accessToken)
             return api(originalRequest)
         }
         return Promise.reject(error)
