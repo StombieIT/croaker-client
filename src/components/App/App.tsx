@@ -1,30 +1,16 @@
-import { FC, useEffect, useState, MouseEvent } from "react"
-import { IUser } from "../../models/IUser"
-import { ACCESS_TOKEN, api, REFRESH_TOKEN } from "../../api/api"
-import { IRefresher } from "../../models/IRefresher"
-import { AxiosResponse } from "axios"
+import { FC } from "react"
+import { useDispatch } from "react-redux"
+import { NotificationType } from "../../models/NotificationType"
+import { addNotification } from "../../reducers/notificationsReducer/notificationsReducer"
+import { Modal } from "../Modal/Modal"
 
 export const App: FC = () => {
-    const [user, setUser] = useState<IUser>({} as IUser)
-    
-    useEffect(() => {
-        const formData = new FormData()
-        formData.append("username", "ficko")
-        formData.append("password", "123456")
-        api.post<FormData, AxiosResponse<IRefresher>>("/login", formData)
-            .then(response => response.data)
-            .then(refresher => {
-                localStorage.setItem(ACCESS_TOKEN, refresher.accessToken)
-                localStorage.setItem(REFRESH_TOKEN, refresher.refreshToken)
-            })
-    }, [])
+    const dispatch = useDispatch()
 
-    const onButtonClick = (evt: MouseEvent<HTMLButtonElement>): void => {
-        api.get<IUser>("/users/my").then(response => setUser(response.data))
-    }
+    const add = () => dispatch(addNotification({text: "awdwad", type: NotificationType.INFO}))
 
     return <div>
-        <pre>{ JSON.stringify(user) }</pre>
-        <button onClick={ onButtonClick }>Click</button>
+        <button onClick={add}>Click</button>
+        <Modal />
     </div>
 }
