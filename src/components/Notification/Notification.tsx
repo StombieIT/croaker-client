@@ -10,7 +10,7 @@ interface INotificationProps {
     onClose: () => void
 }
 
-export const Notification: FC<INotificationProps> = ({ notification, onClose }) => {
+export const Notification: FC<INotificationProps> = ({notification, onClose}) => {
     const notificationClass: string = classNames({
         [classes.common]: classes.common,
         [classes[notification.type]]: classes[notification.type]
