@@ -1,0 +1,57 @@
+.common {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 10px;
+    border-radius: 7px;
+    margin: 8px;
+    width: 100%;
+
+    background-color: #fff;
+    opacity: 80%;
+
+    transition: opacity 0.3s;
+}
+
+.common:hover {
+    opacity: 100%;
+}
+
+.textContainer {
+    word-break: break-all;
+    max-width: 75%;
+}
+
+.info {
+    border: 2px dashed #2395F5;
+    border-left: 4px solid #2395F5;
+}
+
+.success {
+    border: 2px dashed #4AB053;
+    border-left: 4px solid #4AB053;
+}
+
+.error {
+    border: 2px dashed #F54135;
+    border-left: 4px solid #F54135;
+}
+
+.closeButton {
+    cursor: pointer;
+
+    width: 25px;
+    height: 25px;
+    
+    background-color: transparent;
+}
+
+.closeIcon {
+    width: 100%;
+    transition: transform 0.3s;
+}
+
+.closeButton:hover .closeIcon {
+    transform: rotate(90deg);
+}

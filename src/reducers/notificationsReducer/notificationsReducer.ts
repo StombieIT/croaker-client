@@ -4,8 +4,9 @@ import { INotificationContainer } from "../../models/INotificationContainer"
 import { IPayloadAction } from "../../models/IPayloadAction"
 import { v4 } from "uuid"
 
-enum ActionType {
-    ADD_NOTIFICATION
+enum NotificationsStateActionType {
+    ADD_NOTIFICATION,
+    REMOVE_NOTIFICATION
 }
 
 interface INotificationsState {
@@ -18,16 +19,26 @@ const initialState: INotificationsState = {
 
 export const notificationsReducer = (state: INotificationsState = initialState, action: AnyAction): INotificationsState => {
     switch (action.type) {
-        case ActionType.ADD_NOTIFICATION:
+        case NotificationsStateActionType.ADD_NOTIFICATION:
             return {
                 ...state,
                 list: [...state.list, action.payload]
+            }
+        case NotificationsStateActionType.REMOVE_NOTIFICATION:
+            return {
+                ...state,
+                list: state.list.filter(notification => notification.id !== action.payload)
             }
     }
     return state
 }
 
-export const addNotification = (notificationContainer: INotificationContainer): IPayloadAction<ActionType.ADD_NOTIFICATION, INotification> => ({
-    type: ActionType.ADD_NOTIFICATION,
+export const createAddNotificationAction = (notificationContainer: INotificationContainer): IPayloadAction<NotificationsStateActionType.ADD_NOTIFICATION, INotification> => ({
+    type: NotificationsStateActionType.ADD_NOTIFICATION,
     payload: {...notificationContainer, id: v4()}
+})
+
+export const createRemoveNotificationAction = (notificationId: string): IPayloadAction<NotificationsStateActionType.REMOVE_NOTIFICATION, string> => ({
+    type: NotificationsStateActionType.REMOVE_NOTIFICATION,
+    payload: notificationId
 })
