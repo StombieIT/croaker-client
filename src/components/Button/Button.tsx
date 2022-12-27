@@ -18,8 +18,9 @@ interface IButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 export const Button: FC<IButtonProps> = ({subType, className, children, ...props}) => {
-    const buttonClass = classNames(className, {
+    const buttonClass: string = classNames(className, {
         [classes.common]: classes.common,
+        [classes[subType]]: classes[subType]
     })
 
     return <button {...props} className={ buttonClass }>
