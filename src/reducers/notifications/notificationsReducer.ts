@@ -5,8 +5,8 @@ import { IPayloadAction } from "../../models/IPayloadAction"
 import { v4 } from "uuid"
 
 enum NotificationsStateActionType {
-    ADD_NOTIFICATION,
-    REMOVE_NOTIFICATION
+    ADD_NOTIFICATION = "ADD_NOTIFICATION",
+    REMOVE_NOTIFICATION = "REMOVE_NOTIFICATION"
 }
 
 interface INotificationsState {
