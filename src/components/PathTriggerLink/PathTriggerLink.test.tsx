@@ -63,13 +63,13 @@ describe("PathTriggerLink component tests", () => {
         
         render(
             <BrowserRouter>
-                    <PathTriggerLink
-                        to={ path }
-                        className={ isTriggered => classes.common }
-                        style={ isTriggered => linkStyle }
-                    >
-                        { linkText }
-                    </PathTriggerLink>
+                <PathTriggerLink
+                    to={ path }
+                    className={ isTriggered => classes.common }
+                    style={ isTriggered => linkStyle }
+                >
+                    { linkText }
+                </PathTriggerLink>
             </BrowserRouter>
         )
         
