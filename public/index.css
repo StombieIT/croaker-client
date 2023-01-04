@@ -17,6 +17,10 @@ html, body {
     color: none;
 }
 
+:focus, :active {
+    outline: none;
+}
+
 nav, footer, header, aside {
     display: block;
 }
