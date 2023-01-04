@@ -9,6 +9,7 @@ import exploreActiveIcon from "./explore/activeIcon.svg"
 
 import profileIcon from "./profile/icon.svg"
 import profileActiveIcon from "./profile/activeIcon.svg"
+import { Button, ButtonSubType } from "../Button/Button"
 
 export const SideBar: FC = () => {
     return <aside className={ classes.common }>
@@ -29,5 +30,8 @@ export const SideBar: FC = () => {
         >
             Profile
         </SideBarLink>
+        <Button className={ classes.button } subType={ ButtonSubType.PRIMARY }>
+            Croaaaak
+        </Button>
     </aside>
 }

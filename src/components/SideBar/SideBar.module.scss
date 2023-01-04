@@ -5,10 +5,20 @@ $logoSize: 52px;
     flex-direction: column;
 
     padding: 30px;
+
+    font-size: 17px;
 }
 
 .logo {
     margin: 10px;
     width: $logoSize;
     height: $logoSize;
+}
+
+.button {
+    align-self: center;
+
+    padding: 16px 36px;
+    width: fit-content;
+    border-radius: 35px;
 }

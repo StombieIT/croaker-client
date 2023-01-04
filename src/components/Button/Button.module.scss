@@ -5,15 +5,15 @@
 
 @mixin defaultButton($borderColor) {
     @include colored(#fff, #393F35);
-    border: 2px solid $borderColor;
+    border: 3px solid $borderColor;
 }
 
 .common {
     cursor: pointer;
     
-    border-radius: 10px;
-    
     transition: 0.3s background-color, color;
+
+    font-size: inherit;
 }
 
 .primary {
