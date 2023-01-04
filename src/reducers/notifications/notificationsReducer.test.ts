@@ -39,7 +39,7 @@ describe("notifications reducer tests", () => {
         state = notificationsReducer(state, appendNotificationAction)
 
         expect(state.list.length).toBe(1)
-        expect(state.list[0]).toEqual({...notificationContainer, id: notificationId})
+        expect(state.list).toContainEqual({...notificationContainer, id: notificationId})
     })
 
     test("append notifications to the end of array", () => {
