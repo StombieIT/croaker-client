@@ -5,11 +5,11 @@ import { IPayloadAction } from "../../models/IPayloadAction"
 import { v4 } from "uuid"
 
 enum NotificationsStateActionType {
-    ADD_NOTIFICATION = "ADD_NOTIFICATION",
+    APPEND_NOTIFICATION = "APPEND_NOTIFICATION",
     REMOVE_NOTIFICATION = "REMOVE_NOTIFICATION"
 }
 
-interface INotificationsState {
+export interface INotificationsState {
     list: Array<INotification>
 }
 
@@ -19,7 +19,7 @@ const initialState: INotificationsState = {
 
 export const notificationsReducer = (state: INotificationsState = initialState, action: AnyAction): INotificationsState => {
     switch (action.type) {
-        case NotificationsStateActionType.ADD_NOTIFICATION:
+        case NotificationsStateActionType.APPEND_NOTIFICATION:
             return {
                 ...state,
                 list: [...state.list, action.payload]
@@ -33,8 +33,8 @@ export const notificationsReducer = (state: INotificationsState = initialState, 
     return state
 }
 
-export const createAddNotificationAction = (notificationContainer: INotificationContainer): IPayloadAction<NotificationsStateActionType.ADD_NOTIFICATION, INotification> => ({
-    type: NotificationsStateActionType.ADD_NOTIFICATION,
+export const createAppendNotificationAction = (notificationContainer: INotificationContainer): IPayloadAction<NotificationsStateActionType.APPEND_NOTIFICATION, INotification> => ({
+    type: NotificationsStateActionType.APPEND_NOTIFICATION,
     payload: {...notificationContainer, id: v4()}
 })
 
