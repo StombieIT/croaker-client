@@ -2,7 +2,7 @@ import { FC } from "react"
 import { createPortal } from "react-dom"
 import Notifications from "../Notifications/Notifications"
 
-export const Modal: FC = () => createPortal(
+export const NotificationsPopup: FC = () => createPortal(
     <Notifications />,
-    document.getElementById("modal") as HTMLElement
+    document.getElementById("notifications-popup") as HTMLElement
 )

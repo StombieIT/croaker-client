@@ -1,6 +1,6 @@
 import ReactDOM from "react-dom/client"
 import { App } from "./components/App/App"
-import { Modal } from "./components/Modal/Modal"
+import { NotificationsPopup } from "./components/NotificationsPopup/NotificationsPopup"
 import { store } from "./store"
 import { Provider } from "react-redux"
 import { BrowserRouter } from "react-router-dom"
@@ -13,7 +13,7 @@ root.render(
     <BrowserRouter>
         <Provider store={ store }>
             <App />
-            <Modal />
+            <NotificationsPopup />
         </Provider>
     </BrowserRouter>
 )
