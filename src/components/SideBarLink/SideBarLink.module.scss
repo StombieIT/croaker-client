@@ -1,0 +1,38 @@
+$iconSize: 32px;
+
+.common {
+    display: flex;
+    align-items: center;
+
+    text-decoration: none;
+    // width: 70%;
+    margin: 8px;
+}
+
+.notActive {
+    color: #393F35;
+}
+
+.active {
+    color: #4DE87D;
+}
+
+.iconContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    width: $iconSize;
+    height: $iconSize;
+
+    overflow: hidden;
+}
+
+.icon {
+    height: 100%;
+}
+
+.childrenContainer {
+    font-size: 17px;
+    margin-left: 20px;
+}

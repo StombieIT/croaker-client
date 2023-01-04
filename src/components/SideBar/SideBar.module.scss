@@ -1,0 +1,14 @@
+$logoSize: 52px;
+
+.common {
+    display: flex;
+    flex-direction: column;
+
+    padding: 30px;
+}
+
+.logo {
+    margin: 10px;
+    width: $logoSize;
+    height: $logoSize;
+}

@@ -1,0 +1,9 @@
+.common {
+    display: grid;
+    grid-template-columns: 23fr 50fr 26fr;
+
+    margin: 0 auto;
+    width: 1280px;
+
+    background-color: #DAFFE5;
+}
