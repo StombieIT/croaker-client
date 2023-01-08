@@ -1,13 +1,14 @@
 import { DateJson } from "./DateJson"
+import { IActivity } from "./IActivity"
 import { IUser } from "./IUser"
 
 export interface ICroak {
     id: number,
     text: string,
     creationDate: DateJson,
-    likesCount: number,
-    commentsCount: number,
-    recroaksCount: number,
+    likes: IActivity,
+    comments: IActivity,
+    recroaks: IActivity,
     author: IUser
-    imagesLinks?: Array<string>,
+    imagesLinks: Array<string>,
 }

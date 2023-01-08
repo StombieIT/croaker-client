@@ -1,5 +1,7 @@
 import { FC } from "react"
 import { ICroak } from "../../models/ICroak"
+import { ActivitiesBar } from "../ActivitiesBar/ActivitiesBar"
+import { PassedTime } from "../PassedTime/PassedTime"
 
 import classes from "./Croak.module.scss"
 
@@ -19,15 +21,17 @@ export const Croak: FC<ICroakProps> = ({croak}) => {
         <div className={ classes.content }>
             <header className={ classes.header }>
                 <h4 className={ classes.name }>{ croak.author.name }</h4>
-                <div className={ classes.username }>{ croak.author.username }</div>
-                <time className={ classes.passedTime }>{ croak.creationDate }</time>
+                <div className={ classes.username }>@{ croak.author.username }</div>
+                <PassedTime className={ classes.passedTime }>{ croak.creationDate }</PassedTime>
             </header>
             <div className={ classes.text }>{ croak.text }</div>
-            <footer className={ classes.footer }>
-                <button className={ classes.iconButton }>{ croak.likesCount }</button>
-                <button className={ classes.iconButton }>{ croak.commentsCount }</button>
-                <button className={ classes.iconButton }>{ croak.recroaksCount }</button>
-            </footer>
+            <ActivitiesBar
+                likes={ croak.likes }
+                comments={ croak.comments }
+                recroaks={ croak.recroaks }
+                className={ classes.activitiesBar }
+                approximately
+            />
         </div>
     </article>
 }
