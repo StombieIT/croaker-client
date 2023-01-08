@@ -1,4 +1,5 @@
 $avatarSize: 47px;
+$commonMarginSize: 3px;
 
 .container {
     display: flex;
@@ -38,14 +39,12 @@ $avatarSize: 47px;
         padding: 5px;
         width: 100%;
 
-        & > * {
-            margin: 3px;
-        }
-
         .header {
             display: inline-flex;
             align-items: center;
             gap: 10px;
+
+            margin: $commonMarginSize;
 
             .name {
                 font-size: 14px;
@@ -61,13 +60,21 @@ $avatarSize: 47px;
         }
 
         .text {
+            margin: $commonMarginSize;
+
             color: #393F35;
+        }
+
+        .imagesGrid {
+            width: 100%;
         }
 
         .activitiesBar {
             display: inline-flex;
             align-items: center;
             gap: 20px;
+
+            margin: $commonMarginSize;
         }
     }
 }

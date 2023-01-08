@@ -1,6 +1,7 @@
 import { FC } from "react"
 import { ICroak } from "../../models/ICroak"
 import { ActivitiesBar } from "../ActivitiesBar/ActivitiesBar"
+import { MediaGrid } from "../MediaGrid/MediaGrid"
 import { PassedTime } from "../PassedTime/PassedTime"
 
 import classes from "./Croak.module.scss"
@@ -25,6 +26,11 @@ export const Croak: FC<ICroakProps> = ({croak}) => {
                 <PassedTime className={ classes.passedTime }>{ croak.creationDate }</PassedTime>
             </header>
             <div className={ classes.text }>{ croak.text }</div>
+            <MediaGrid className={ classes.imagesGrid }>
+                {
+                    croak.imagesLinks.map(imageLink => <img src={ imageLink } alt={ `${imageLink} image` } />)
+                }
+            </MediaGrid>
             <ActivitiesBar
                 likes={ croak.likes }
                 comments={ croak.comments }
