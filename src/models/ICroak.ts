@@ -1,5 +1,6 @@
 import { DateJson } from "./DateJson"
 import { IActivity } from "./IActivity"
+import { ILink } from "./ILink"
 import { IUser } from "./IUser"
 
 export interface ICroak {
@@ -10,5 +11,5 @@ export interface ICroak {
     comments: IActivity,
     recroaks: IActivity,
     author: IUser
-    imagesLinks: Array<string>,
+    imagesLinks: Array<ILink>
 }
