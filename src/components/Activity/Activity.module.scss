@@ -1,0 +1,19 @@
+$iconSize: 20px;
+
+.button {
+    display: flex;
+    align-items: center;
+    
+    background-color: transparent;
+    color: #393F3599;
+
+    font-size: inherit;
+
+    cursor: pointer;
+
+    .icon {
+        margin: 5px;
+        width: $iconSize;
+        height: $iconSize;
+    }
+}
