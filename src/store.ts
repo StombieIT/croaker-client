@@ -1,6 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit"
-import { croaksReducer } from "./reducers/croaks/croaksReducer"
-import { notificationsReducer } from "./reducers/notifications/notificationsReducer"
+import { croaksReducer } from "./reducers/croaks/croaksSlice"
+import { notificationsReducer } from "./reducers/notifications/notificationsSlice"
 
 export const store = configureStore({
     reducer: {
