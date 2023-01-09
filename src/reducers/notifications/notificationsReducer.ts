@@ -4,7 +4,7 @@ import { INotificationContainer } from "../../models/INotificationContainer"
 import { IPayloadAction } from "../../models/IPayloadAction"
 import { v4 } from "uuid"
 
-enum NotificationsStateActionType {
+enum NotificationsReducerActionType {
     APPEND_NOTIFICATION = "APPEND_NOTIFICATION",
     REMOVE_NOTIFICATION = "REMOVE_NOTIFICATION"
 }
@@ -19,12 +19,12 @@ const initialState: INotificationsState = {
 
 export const notificationsReducer = (state: INotificationsState = initialState, action: AnyAction): INotificationsState => {
     switch (action.type) {
-        case NotificationsStateActionType.APPEND_NOTIFICATION:
+        case NotificationsReducerActionType.APPEND_NOTIFICATION:
             return {
                 ...state,
                 list: [...state.list, action.payload]
             }
-        case NotificationsStateActionType.REMOVE_NOTIFICATION:
+        case NotificationsReducerActionType.REMOVE_NOTIFICATION:
             return {
                 ...state,
                 list: state.list.filter(notification => notification.id !== action.payload)
@@ -33,12 +33,12 @@ export const notificationsReducer = (state: INotificationsState = initialState, 
     return state
 }
 
-export const createAppendNotificationAction = (notificationContainer: INotificationContainer): IPayloadAction<NotificationsStateActionType.APPEND_NOTIFICATION, INotification> => ({
-    type: NotificationsStateActionType.APPEND_NOTIFICATION,
+export const createAppendNotificationAction = (notificationContainer: INotificationContainer): IPayloadAction<NotificationsReducerActionType.APPEND_NOTIFICATION, INotification> => ({
+    type: NotificationsReducerActionType.APPEND_NOTIFICATION,
     payload: {...notificationContainer, id: v4()}
 })
 
-export const createRemoveNotificationAction = (notificationId: string): IPayloadAction<NotificationsStateActionType.REMOVE_NOTIFICATION, string> => ({
-    type: NotificationsStateActionType.REMOVE_NOTIFICATION,
+export const createRemoveNotificationAction = (notificationId: string): IPayloadAction<NotificationsReducerActionType.REMOVE_NOTIFICATION, string> => ({
+    type: NotificationsReducerActionType.REMOVE_NOTIFICATION,
     payload: notificationId
 })
