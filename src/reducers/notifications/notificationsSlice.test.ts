@@ -1,9 +1,10 @@
 import {
-    createAppendNotificationAction,
-    createRemoveNotificationAction,
+    appendNotificationContainer,
+    appendNotification,
+    removeNotification,
     INotificationsState,
     notificationsReducer
-} from "./notificationsReducer"
+} from "./notificationsSlice"
 import { NotificationType } from "../../models/NotificationType"
 import { INotificationContainer } from "../../models/INotificationContainer"
 import { INotification } from "../../models/INotification"
@@ -23,23 +24,40 @@ const randomInt = (min: number, max: number): number => Math.floor(Math.random()
 
 describe("notifications reducer tests", () => {
     let state: INotificationsState
-    let notificationContainer: INotificationContainer
+    let notification: INotification
     
     beforeEach(() => {
         state = {
             list: []
         }
-        notificationContainer = generateNotificationContainer(NotificationType.INFO)
+        notification = generateNotification(NotificationType.INFO)
+    })
+
+    test("append notification container to empty array", () => {
+        const appendNotificationContainerAction = appendNotificationContainer(notification)
+
+        state = notificationsReducer(state, appendNotificationContainer)
+
+        expect(state.list.length).toBe(1)
+    })
+
+    test("append notification container to filled array", () => {
+        state.list.push(
+            generateNotification(NotificationType.ERROR),
+            generateNotification(NotificationType.SUCCESS)
+        )
+        const initialListLength: number = state.list.length
+        
+        state = notificationsReducer(state, appendNotification(notification))
+
+        expect(state.list.length).toBe(initialListLength + 1)
     })
 
     test("append notification to empty array", () => {
-        const appendNotificationAction = createAppendNotificationAction(notificationContainer)
-        const notificationId: string = appendNotificationAction.payload.id
-
-        state = notificationsReducer(state, appendNotificationAction)
+        state = notificationsReducer(state, appendNotification(notification))
 
         expect(state.list.length).toBe(1)
-        expect(state.list).toContainEqual({...notificationContainer, id: notificationId})
+        expect(state.list).toContainEqual(notification)
     })
 
     test("append notifications to the end of array", () => {
@@ -48,19 +66,15 @@ describe("notifications reducer tests", () => {
             generateNotification(NotificationType.SUCCESS)
         )
         const initialListLength: number = state.list.length
-        const appendNotificationAction = createAppendNotificationAction(notificationContainer)
-        const notificationId: string = appendNotificationAction.payload.id
         
-        state = notificationsReducer(state, appendNotificationAction)
+        state = notificationsReducer(state, appendNotification(notification))
 
         expect(state.list.length).toBe(initialListLength + 1)
-        expect(state.list.at(-1)).toEqual({...notificationContainer, id: notificationId})
+        expect(state.list.at(-1)).toEqual(notification)
     })
 
     test("remove notification from empty array", () => {
-        const removeNotificationAction = createRemoveNotificationAction(v4())
-
-        const updatedState = notificationsReducer(state, removeNotificationAction)
+        const updatedState = notificationsReducer(state, removeNotification(v4()))
 
         expect(updatedState).toEqual(state)
     })
@@ -73,9 +87,8 @@ describe("notifications reducer tests", () => {
         )
         const list: Array<INotification> = state.list
         const notificationId: string = state.list[randomInt(0, state.list.length - 1)].id
-        const removeNotificationAction = createRemoveNotificationAction(notificationId)
 
-        state = notificationsReducer(state, removeNotificationAction)
+        state = notificationsReducer(state, removeNotification(notificationId))
 
         expect(state.list.length).toBe(list.length - 1)
         expect(state.list).toEqual(list.filter(notification => notification.id !== notificationId))
