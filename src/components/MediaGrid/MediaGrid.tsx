@@ -14,7 +14,7 @@ export const MediaGrid: FC<IMediaGridProps> = ({children, className}) => {
     
     return <div className={ gridClass }>
         {
-            Children.map(children, (child, idx) => <Media className={ classes.wrapper }>{ child }</Media>)
+            Children.map(children, child => <Media className={ classes.wrapper }>{ child }</Media>)
         }
     </div>
 }
