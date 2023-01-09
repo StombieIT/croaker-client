@@ -7,10 +7,18 @@ import { PassedTime } from "../PassedTime/PassedTime"
 import classes from "./Croak.module.scss"
 
 interface ICroakProps {
-    croak: ICroak
+    croak: ICroak,
+    onLikesClick?: () => void,
+    onCommentsClick?: () => void,
+    onRecroaksClick?: () => void
 }
 
-export const Croak: FC<ICroakProps> = ({croak}) => {
+export const Croak: FC<ICroakProps> = ({
+    croak,
+    onLikesClick,
+    onCommentsClick,
+    onRecroaksClick
+}) => {
     return <article className={ classes.container }>
         <div className={ classes.avatarWrapper }>
             <img
@@ -33,8 +41,11 @@ export const Croak: FC<ICroakProps> = ({croak}) => {
             </MediaGrid>
             <ActivitiesBar
                 likes={ croak.likes }
+                onLikesClick={ onLikesClick }
                 comments={ croak.comments }
+                onCommentsClick={ onCommentsClick }
                 recroaks={ croak.recroaks }
+                onRecroaksClick={ onRecroaksClick }
                 className={ classes.activitiesBar }
                 approximately
             />
