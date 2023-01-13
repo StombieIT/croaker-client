@@ -36,7 +36,7 @@ export const Croak: FC<ICroakProps> = ({
             <div className={ classes.text }>{ croak.text }</div>
             <MediaGrid className={ classes.imagesGrid }>
                 {
-                    croak.imagesLinks.map(imageLink => <img key={ imageLink.id } src={ imageLink.value } alt={ `${imageLink} image` } />)
+                    croak.imagesLinks.map(imageLink => <img key={ imageLink } src={ imageLink } alt={ `${imageLink} image` } />)
                 }
             </MediaGrid>
             <ActivitiesBar
