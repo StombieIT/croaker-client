@@ -11,7 +11,7 @@ import commentsActiveIcon from "./comments/activeIcon.svg"
 
 import recroaksIcon from "./recroaks/icon.svg"
 import recroaksActiveIcon from "./recroaks/activeIcon.svg"
-import { formatNumber } from "./utils"
+import { formatNumber } from "../../utils/formatNumber"
 
 export enum ReactionType {
     LIKES,
