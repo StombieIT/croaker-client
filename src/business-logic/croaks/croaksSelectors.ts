@@ -1,4 +1,4 @@
-import { ICroak } from "../../models/ICroak"
 import { RootState } from "../../store"
+import { ICroaksState } from "./croaksSlice"
 
-export const selectCroaksList = (state: RootState): Array<ICroak> => state.croaks.list
+export const selectCroaks = (state: RootState): ICroaksState => state.croaks
