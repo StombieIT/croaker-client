@@ -1,0 +1,1 @@
+export type DateJsonDefaultPrefix = `${number}-${number}-${number}T${number}:${number}:${number}.${number}`
