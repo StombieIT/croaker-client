@@ -1,7 +1,7 @@
 import { FC, MouseEvent, useMemo } from "react"
-import { IActivity } from "../../models/IActivity"
+import { IReaction } from "../../models/IReaction"
 
-import classes from "./Activity.module.scss"
+import classes from "./Reaction.module.scss"
 
 import likesIcon from "./likes/icon.svg"
 import likesActiveIcon from "./likes/activeIcon.svg"
@@ -13,22 +13,22 @@ import recroaksIcon from "./recroaks/icon.svg"
 import recroaksActiveIcon from "./recroaks/activeIcon.svg"
 import { formatNumber } from "./utils"
 
-export enum ActivityType {
+export enum ReactionType {
     LIKES,
     COMMENTS,
     RECROAKS
 }
 
-interface IActivityProps {
-    type: ActivityType,
-    activity: IActivity,
+interface IReactionProps {
+    type: ReactionType,
+    reaction: IReaction,
     approximately?: boolean,
     onClick?: () => void
 }
 
-export const Activity: FC<IActivityProps> = ({
+export const Reaction: FC<IReactionProps> = ({
     type,
-    activity,
+    reaction,
     approximately = false,
     onClick
 }) => {
@@ -41,23 +41,23 @@ export const Activity: FC<IActivityProps> = ({
 
     const icon = useMemo<string>(() => {
         switch (type) {
-            case ActivityType.LIKES:
-                if (activity.isActive) {
+            case ReactionType.LIKES:
+                if (reaction.isActive) {
                     return likesActiveIcon
                 }
                 return likesIcon
-            case ActivityType.COMMENTS:
-                if (activity.isActive) {
+            case ReactionType.COMMENTS:
+                if (reaction.isActive) {
                     return commentsActiveIcon
                 }
                 return commentsIcon
-            case ActivityType.RECROAKS:
-                if (activity.isActive) {
+            case ReactionType.RECROAKS:
+                if (reaction.isActive) {
                     return recroaksActiveIcon
                 }
                 return recroaksIcon
         }
-    }, [type, activity.isActive])
+    }, [type, reaction.isActive])
 
     return <button className={ classes.button } onClick={ onButtonClick }>
         <img
@@ -67,8 +67,8 @@ export const Activity: FC<IActivityProps> = ({
         />
         {
             approximately
-            ? formatNumber(activity.count)
-            : activity.count
+            ? formatNumber(reaction.count)
+            : reaction.count
         }
     </button>
 }

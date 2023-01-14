@@ -1,18 +1,18 @@
 import { FC, HTMLAttributes } from "react"
-import { IActivity } from "../../models/IActivity"
-import { Activity, ActivityType } from "../Activity/Activity"
+import { IReaction } from "../../models/IReaction"
+import { Reaction, ReactionType } from "../Reaction/Reaction"
 
-interface IActivitiesBarProps extends HTMLAttributes<HTMLDivElement> {
-    likes: IActivity,
-    comments: IActivity,
-    recroaks: IActivity,
+interface IReactionsBarProps extends HTMLAttributes<HTMLDivElement> {
+    likes: IReaction,
+    comments: IReaction,
+    recroaks: IReaction,
     approximately?: boolean,
     onLikesClick?: () => void,
     onCommentsClick?: () => void,
     onRecroaksClick?: () => void
 }
 
-export const ActivitiesBar : FC<IActivitiesBarProps> = ({
+export const ReactionsBar : FC<IReactionsBarProps> = ({
     likes,
     comments,
     recroaks,
@@ -23,21 +23,21 @@ export const ActivitiesBar : FC<IActivitiesBarProps> = ({
     ...props
 }) => {
     return <div {...props} >
-        <Activity
-            type={ ActivityType.LIKES }
-            activity={ likes }
+        <Reaction
+            type={ ReactionType.LIKES }
+            reaction={ likes }
             onClick={ onLikesClick }
             approximately={ approximately }
         />
-        <Activity
-            type={ ActivityType.COMMENTS }
-            activity={ comments }
+        <Reaction
+            type={ ReactionType.COMMENTS }
+            reaction={ comments }
             onClick={ onCommentsClick }
             approximately={ approximately }
         />
-        <Activity
-            type={ ActivityType.RECROAKS }
-            activity={ recroaks }
+        <Reaction
+            type={ ReactionType.RECROAKS }
+            reaction={ recroaks }
             onClick={ onRecroaksClick }
             approximately={ approximately }
         />

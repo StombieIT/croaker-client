@@ -1,6 +1,6 @@
 import { FC } from "react"
 import { ICroak } from "../../models/ICroak"
-import { ActivitiesBar } from "../ActivitiesBar/ActivitiesBar"
+import { ReactionsBar } from "../ReactionsBar/ReactionsBar"
 import { MediaGrid } from "../MediaGrid/MediaGrid"
 import { PassedTime } from "../PassedTime/PassedTime"
 
@@ -39,7 +39,7 @@ export const Croak: FC<ICroakProps> = ({
                     croak.imagesLinks.map(imageLink => <img key={ imageLink } src={ imageLink } alt={ `${imageLink} image` } />)
                 }
             </MediaGrid>
-            <ActivitiesBar
+            <ReactionsBar
                 likes={ croak.likes }
                 onLikesClick={ onLikesClick }
                 comments={ croak.comments }
