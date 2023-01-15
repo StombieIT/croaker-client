@@ -1,0 +1,13 @@
+@use "../../constants" as *;
+
+.container {
+    background-color: $mainColor;
+
+    .backgroundImage {
+        height: 250px;
+    }
+
+    .content {
+        padding: 0 45px;
+    }
+}
