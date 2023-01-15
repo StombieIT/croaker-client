@@ -1,0 +1,21 @@
+.container {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    
+    font-size: 12px;
+    
+    .element {
+        color: #393F3599;
+    }
+    
+    .withIcon {
+        @extend .element;
+        display: flex;
+        align-items: center;
+    }
+
+    .bold {
+        font-weight: 600;
+    }
+}
