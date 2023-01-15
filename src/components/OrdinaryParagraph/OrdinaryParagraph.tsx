@@ -1,5 +1,5 @@
-import classNames from "classnames"
 import { FC, HTMLAttributes } from "react"
+import classNames from "classnames"
 
 import classes from "./OrdinaryParagraph.module.css"
 
