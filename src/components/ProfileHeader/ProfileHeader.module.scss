@@ -1,0 +1,50 @@
+@mixin verticallyCenteredContent {
+    display: flex;
+    align-items: center;
+}
+
+.header {
+    display: grid;
+
+    padding: 10px;
+
+    grid-template-columns: 80px;
+    grid-template-areas:
+        "bb un"
+        "bb cc";
+
+    height: 80px;
+
+    .backButton {
+        grid-area: bb;
+
+        background-color: transparent;
+        
+        cursor: pointer;
+    }
+
+    .name {
+        grid-area: un;
+
+        
+        @include verticallyCenteredContent;
+        
+        color: #282D24;
+
+        
+        font-size: 17px;
+        font-weight: 500;
+    }
+
+    .croaksCount {
+        grid-area: cc;
+
+        @include verticallyCenteredContent;
+
+        color: #393F35;
+
+        font-size: 14px;
+        
+        font-weight: 300;
+    }
+}
