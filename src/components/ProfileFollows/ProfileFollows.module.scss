@@ -1,0 +1,14 @@
+.container {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+
+    .element {
+        color: #393F35;
+        font-size: 12px;
+    }
+
+    .bold {
+        font-weight: 600;
+    }
+}
