@@ -1,0 +1,22 @@
+.common {
+    display: flex;
+    align-items: center;
+
+    overflow: hidden;
+}
+
+.horizontal {
+    flex-direction: row;
+
+    &Image {
+        height: 100%;
+    }
+}
+
+.vertical {
+    flex-direction: column;
+
+    &Image {
+        width: 100%;
+    }
+}
