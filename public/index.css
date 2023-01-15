@@ -5,7 +5,20 @@ html, body {
 
 @font-face {
     font-family: Noto-Sans;
-    src: url(noto-sans.otf);
+    src: url(NotoSans-Medium.ttf);
+    font-weight: 500;
+}
+
+@font-face {
+    font-family: Noto-Sans;
+    src: url(NotoSans-Regular.ttf);
+    font-weight: 400;
+}
+
+@font-face {
+    font-family: Noto-Sans;
+    src: url(NotoSans-Light.ttf);
+    font-weight: 300;
 }
 
 * {
