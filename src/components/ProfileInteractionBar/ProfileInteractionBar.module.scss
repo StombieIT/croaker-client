@@ -1,0 +1,26 @@
+@use "../../constants" as *;
+
+$avatarSize: 60px;
+$scaleTimes: 2;
+
+.bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    align-items: center;
+
+    .avatar {
+        width: $avatarSize;
+        height: $avatarSize;
+
+        // TODO: need to fix this
+        transform: scale($scaleTimes) translate($avatarSize / ($scaleTimes * $scaleTimes), -$avatarSize / ($scaleTimes * $scaleTimes));
+    
+        outline: 3px solid $mainColor;
+    }
+
+    .button {
+        padding: 6px 24px;
+        border-radius: 20px;
+    }
+}
