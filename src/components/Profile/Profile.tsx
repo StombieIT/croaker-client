@@ -47,10 +47,18 @@ export const Profile: FC<IProfileProps> = ({state}) => {
             />
         </div>
         <NavBar className={ classes.navbar }>
-            <NavLink to="/croaks">Croaks</NavLink>
-            <NavLink to="/croaks-and-replies">Croaks & Replies</NavLink>
-            <NavLink to="/media">Media</NavLink>
-            <NavLink to="/likes">Likes</NavLink>
+            <NavLink to="/profile/croaks">
+                Croaks
+            </NavLink>
+            <NavLink to="/profile/croaks-and-replies">
+                Croaks & Replies
+            </NavLink>
+            <NavLink to="/profile/media">
+                Media
+            </NavLink>
+            <NavLink to="/profile/likes">
+                Likes
+            </NavLink>
         </NavBar>
     </main>
 }
