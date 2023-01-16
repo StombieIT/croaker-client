@@ -1,0 +1,26 @@
+@use "../../constants" as *;
+
+.navbar {
+    display: flex;
+
+    .link {
+        flex-grow: 1;
+
+        padding: 20px;
+        
+        color: $darkTextColor;
+        
+        font-size: $mediumFontSize;
+        font-weight: 500;
+
+        text-align: center;
+        text-decoration: none;
+    }
+
+    .active {
+        color: $activeColor;
+        border: {
+            bottom: 3px solid $activeColor;
+        };
+    }
+}
