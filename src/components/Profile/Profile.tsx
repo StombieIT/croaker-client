@@ -1,4 +1,5 @@
 import { FC, useEffect } from "react"
+import { NavLink } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"
 import { selectProfileState } from "../../business-logic/profile/profileSelectors"
 import { IProfileState, setProfile } from "../../business-logic/profile/profileSlice"
@@ -7,12 +8,12 @@ import { ProfileHeader } from "../ProfileHeader/ProfileHeader"
 import { IUser } from "../../models/IUser"
 import { IProfile } from "../../models/IProfile"
 import { DateJson } from "../../models/DateJson"
-import { Avatar } from "../Avatar/Avatar"
 import { ImageWrapper, ImageWrapperType } from "../ImageWrapper/ImageWrapper"
-
-import classes from "./Profile.module.scss"
 import { ProfileInteractionBar } from "../ProfileInteractionBar/ProfileInteractionBar"
 import { ProfileUserInfo } from "../ProfileInfo/ProfileInfo"
+import { NavBar } from "../NavBar/NavBar"
+
+import classes from "./Profile.module.scss"
 
 interface IProfileContainerProps {
 }
@@ -45,6 +46,12 @@ export const Profile: FC<IProfileProps> = ({state}) => {
                 profile={ state.profile }
             />
         </div>
+        <NavBar className={ classes.navbar }>
+            <NavLink to="/croaks">Croaks</NavLink>
+            <NavLink to="/croaks-and-replies">Croaks & Replies</NavLink>
+            <NavLink to="/media">Media</NavLink>
+            <NavLink to="/likes">Likes</NavLink>
+        </NavBar>
     </main>
 }
 
