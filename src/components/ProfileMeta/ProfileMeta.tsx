@@ -25,13 +25,21 @@ export const ProfileMeta: FC<IProfileMetaProps> = ({
             User id: <b className={ classes.bold }>{ userId }</b>
         </div>
         <div className={ classes.withIcon }>
-            <img src={ locationIcon } alt="Location icon" />
+            <img
+                className={ classes.icon }
+                src={ locationIcon }
+                alt="Location icon"
+            />
             <div>
                 <b className={ classes.bold }>{ country }</b>, { city }
             </div>
         </div>
         <div className={ classes.withIcon }>
-            <img src={ calendarIcon } alt="Calendar icon" />
+            <img
+                className={ classes.icon }
+                src={ calendarIcon }
+                alt="Calendar icon"
+            />
             <div>
                 Member scince <b className={ classes.bold }>{ formatDateToMonthAndYear(new Date(registrationDate)) }</b>
             </div>

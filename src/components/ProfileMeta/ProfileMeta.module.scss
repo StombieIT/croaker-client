@@ -13,6 +13,10 @@
         @extend .element;
         display: flex;
         align-items: center;
+        
+        .icon {
+            margin: 5px;
+        }
     }
 
     .bold {
