@@ -66,4 +66,4 @@ export const croaksReducer = croaksSlice.reducer
 
 export const { mergePaginator, toggleLikesIsActive, toggleCommentsIsActive, toggleRecroaksIsActive } = croaksSlice.actions
 
-export const fetchCroaks = createAction(`${croaksSlice.name}/fetchCroaks`)
+export const fetchCroaks = createAction<number>(`${croaksSlice.name}/fetchCroaks`)

@@ -28,4 +28,4 @@ export const profileReducer = profileSlice.reducer
 
 export const { setIsLoading, setProfile } = profileSlice.actions
 
-export const fetchProfile = createAction(`${profileSlice.name}/fetchProfile`)
+export const fetchProfile = createAction<number>(`${profileSlice.name}/fetchProfile`)
