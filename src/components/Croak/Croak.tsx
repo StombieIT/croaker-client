@@ -5,6 +5,7 @@ import { MediaGrid } from "../MediaGrid/MediaGrid"
 import { PassedTime } from "../PassedTime/PassedTime"
 
 import classes from "./Croak.module.scss"
+import { Username } from "../Username/Username"
 
 interface ICroakProps {
     croak: ICroak,
@@ -30,7 +31,7 @@ export const Croak: FC<ICroakProps> = ({
         <div className={ classes.content }>
             <header className={ classes.header }>
                 <h4 className={ classes.name }>{ croak.author.name }</h4>
-                <div className={ classes.username }>@{ croak.author.username }</div>
+                <Username className={ classes.username }>{ croak.author.username }</Username>
                 <PassedTime className={ classes.passedTime }>{ croak.creationDate }</PassedTime>
             </header>
             <div className={ classes.text }>{ croak.text }</div>
