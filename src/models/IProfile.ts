@@ -2,7 +2,7 @@ import { IUser } from "./IUser"
 
 export interface IProfile {
     user: IUser,
-    description: string,
+    description: string | null,
     city: string,
     country: string,
     croaksCount: number,
