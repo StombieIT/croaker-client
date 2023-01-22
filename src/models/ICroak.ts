@@ -4,5 +4,5 @@ import { IReaction } from "./IReaction"
 export interface ICroak extends ICroakBase {
     likes: IReaction,
     comments: IReaction,
-    recroaks: IReaction
+    replies: IReaction
 }

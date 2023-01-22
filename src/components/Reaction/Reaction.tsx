@@ -1,5 +1,6 @@
 import { FC, MouseEvent, useMemo } from "react"
 import { IReaction } from "../../models/IReaction"
+import { formatNumber } from "../../utils/formatNumber"
 
 import classes from "./Reaction.module.scss"
 
@@ -9,14 +10,13 @@ import likesActiveIcon from "./likes/activeIcon.svg"
 import commentsIcon from "./comments/icon.svg"
 import commentsActiveIcon from "./comments/activeIcon.svg"
 
-import recroaksIcon from "./recroaks/icon.svg"
-import recroaksActiveIcon from "./recroaks/activeIcon.svg"
-import { formatNumber } from "../../utils/formatNumber"
+import repliesIcon from "./replies/icon.svg"
+import repliesActiveIcon from "./replies/activeIcon.svg"
 
 export enum ReactionType {
     LIKES,
     COMMENTS,
-    RECROAKS
+    REPLIES
 }
 
 interface IReactionProps {
@@ -51,11 +51,11 @@ export const Reaction: FC<IReactionProps> = ({
                     return commentsActiveIcon
                 }
                 return commentsIcon
-            case ReactionType.RECROAKS:
+            case ReactionType.REPLIES:
                 if (reaction.isActive) {
-                    return recroaksActiveIcon
+                    return repliesActiveIcon
                 }
-                return recroaksIcon
+                return repliesIcon
         }
     }, [type, reaction.isActive])
 

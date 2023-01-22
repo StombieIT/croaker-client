@@ -5,21 +5,21 @@ import { Reaction, ReactionType } from "../Reaction/Reaction"
 interface IReactionsBarProps extends HTMLAttributes<HTMLDivElement> {
     likes: IReaction,
     comments: IReaction,
-    recroaks: IReaction,
+    replies: IReaction,
     approximately?: boolean,
     onLikesClick?: () => void,
     onCommentsClick?: () => void,
-    onRecroaksClick?: () => void
+    onRepliesClick?: () => void
 }
 
 export const ReactionsBar : FC<IReactionsBarProps> = ({
     likes,
     comments,
-    recroaks,
+    replies,
     approximately = false,
     onLikesClick,
     onCommentsClick,
-    onRecroaksClick,
+    onRepliesClick,
     ...props
 }) => {
     return <div {...props} >
@@ -36,9 +36,9 @@ export const ReactionsBar : FC<IReactionsBarProps> = ({
             approximately={ approximately }
         />
         <Reaction
-            type={ ReactionType.RECROAKS }
-            reaction={ recroaks }
-            onClick={ onRecroaksClick }
+            type={ ReactionType.REPLIES }
+            reaction={ replies }
+            onClick={ onRepliesClick }
             approximately={ approximately }
         />
     </div>
