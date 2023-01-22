@@ -5,8 +5,8 @@ export interface IProfile {
     description: string | null,
     city: string,
     country: string,
-    croaksCount: number,
     followersCount: number,
+    croaksCount: number,
     followingCount: number,
     backgroundImageLink: string | null
 }
