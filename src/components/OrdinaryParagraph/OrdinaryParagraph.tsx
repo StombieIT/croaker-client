@@ -4,7 +4,7 @@ import classNames from "classnames"
 import classes from "./OrdinaryParagraph.module.css"
 
 interface IOrdinaryParagraphProps extends HTMLAttributes<HTMLParagraphElement> {
-    children: string,
+    children?: string,
     className?: string
 }
 

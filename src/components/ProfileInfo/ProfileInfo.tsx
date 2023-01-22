@@ -20,7 +20,7 @@ export const ProfileUserInfo: FC<IProfileInfoProps> = ({profile}) => {
             { profile.user.username }
         </Username>
         <OrdinaryParagraph>
-            { profile.description }
+            { profile.description ?? undefined }
         </OrdinaryParagraph>
         <ProfileMeta
             userId={ profile.user.id }
