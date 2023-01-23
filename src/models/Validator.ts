@@ -1,0 +1,1 @@
+export type Validator<T extends string | boolean> = (value: T) => string | undefined
