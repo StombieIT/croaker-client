@@ -3,7 +3,7 @@
     grid-template-columns: 23fr 50fr 26fr;
 
     margin: 0 auto;
-    width: 1280px;
+    max-width: 1280px;
     height: 100%;
 
     background-color: #DAFFE5;
