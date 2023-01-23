@@ -15,6 +15,10 @@ const croaksSlice = createSlice({
     name: "croaks",
     initialState,
     reducers: {
+        setIsLoading(state, action: PayloadAction<boolean>): void {
+            state.isLoading = action.payload
+        },
+
         mergePaginator(state, action: PayloadAction<IPaginator<ICroak>>): void {
             if (state.paginator) {
                 state.paginator = {
@@ -50,20 +54,27 @@ const croaksSlice = createSlice({
             }
         },
 
-        toggleRecroaksIsActive(state, action: PayloadAction<number>): void {
+        toggleRepliesIsActive(state, action: PayloadAction<number>): void {
             if (state.paginator) {
                 state.paginator.items.forEach(croak => {
                     if (croak.id === action.payload) {
-                        croak.recroaks.isActive = !croak.recroaks.isActive
+                        croak.replies.isActive = !croak.replies.isActive
                     }
                 })
             }
+        },
+
+        tearDown(state): ICroaksState {
+            return initialState
         }
     }
 })
 
 export const croaksReducer = croaksSlice.reducer
 
-export const { mergePaginator, toggleLikesIsActive, toggleCommentsIsActive, toggleRecroaksIsActive } = croaksSlice.actions
+export const {
+    mergePaginator, toggleLikesIsActive, toggleCommentsIsActive,
+    toggleRepliesIsActive, setIsLoading, tearDown
+} = croaksSlice.actions
 
-export const fetchCroaks = createAction<number>(`${croaksSlice.name}/fetchCroaks`)
+export const fetchNextCroaksByUserId = createAction<number>(`${croaksSlice.name}/fetchNextCroaksByUserId`)
