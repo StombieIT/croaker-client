@@ -1,16 +1,17 @@
 import { FC, useEffect } from "react"
-import { Routes, Route } from "react-router-dom"
-import { NavLink } from "react-router-dom"
+import { Routes, Route, useParams } from "react-router-dom"
+import { NavLink, Navigate } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"
 import { selectProfileState } from "../../business-logic/profile/profileSelectors"
-import { fetchProfile, IProfileState, setProfile } from "../../business-logic/profile/profileSlice"
+import { fetchProfileById, IProfileState, tearDown } from "../../business-logic/profile/profileSlice"
 import { AppDispatch } from "../../store"
-import { ProfileHeader } from "../ProfileHeader/ProfileHeader"
 import { ImageWrapper, ImageWrapperType } from "../ImageWrapper/ImageWrapper"
 import { ProfileInteractionBar } from "../ProfileInteractionBar/ProfileInteractionBar"
 import { ProfileUserInfo } from "../ProfileInfo/ProfileInfo"
 import { NavBar } from "../NavBar/NavBar"
+import { PreLoader } from "../PreLoader/PreLoader"
 import Croaks from "../Croaks/Croaks"
+import ProfileHeader from "../ProfileHeader/ProfileHeader"
 
 import classes from "./Profile.module.scss"
 
@@ -22,8 +23,8 @@ interface IProfileProps extends IProfileContainerProps {
 }
 
 export const Profile: FC<IProfileProps> = ({state}) => {
-    if (!state.profile) {
-        return null
+    if (state.isLoading || !state.profile) {
+        return <PreLoader />
     }
     
     return <main className={ classes.container }>
@@ -46,7 +47,7 @@ export const Profile: FC<IProfileProps> = ({state}) => {
             />
         </div>
         <NavBar className={ classes.navbar }>
-            <NavLink to="/profile/croaks">
+            <NavLink to={"/profile/croaks"}>
                 Croaks
             </NavLink>
             <NavLink to="/profile/croaks-and-replies">
@@ -66,14 +67,28 @@ export const Profile: FC<IProfileProps> = ({state}) => {
 }
 
 const ProfileContainer: FC<IProfileContainerProps> = ({}) => {
-    const state: IProfileState = useSelector(selectProfileState)
+    const { id } = useParams()
+    
     const dispatch: AppDispatch = useDispatch()
-
+    
+    const state: IProfileState = useSelector(selectProfileState)
+    
     useEffect(() => {
-        dispatch(fetchProfile(1))
-    }, [])
+        if (id) {
+            dispatch(fetchProfileById(parseInt(id)))
+        }
+        return () => {
+            dispatch(tearDown())
+        }
+    }, [id])
+    
+    if (!id || !parseInt(id)) {
+        return <Navigate to="/error/404" />
+    }
 
-    return <Profile state={ state } />
+    return <Profile
+        state={ state }
+    />
 }
 
 export default ProfileContainer
