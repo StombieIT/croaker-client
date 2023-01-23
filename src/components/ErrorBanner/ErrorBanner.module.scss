@@ -1,0 +1,34 @@
+@import "../../constants";
+
+$iconSize: 150px;
+
+.banner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .icon {
+        height: $iconSize;
+        width: $iconSize;
+
+        margin: 20px;
+    }
+
+    .heading {
+        margin: 7px;
+
+        color: $darkTextColor;
+
+        font-size: 30px;
+        font-weight: 700;
+    }
+
+    .text {
+        margin: 5px;
+
+        color: #393F35;
+
+        font-size: $mediumFontSize;
+        font-style: italic;
+    }
+}
