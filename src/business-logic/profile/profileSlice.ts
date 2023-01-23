@@ -20,12 +20,16 @@ export const profileSlice = createSlice({
 
         setProfile(state, action: PayloadAction<IProfile>): void {
             state.profile = action.payload
+        },
+
+        tearDown(state): IProfileState {
+            return initialState
         }
     }
 })
 
 export const profileReducer = profileSlice.reducer
 
-export const { setIsLoading, setProfile } = profileSlice.actions
+export const { setIsLoading, setProfile, tearDown } = profileSlice.actions
 
-export const fetchProfile = createAction<number>(`${profileSlice.name}/fetchProfile`)
+export const fetchProfileById = createAction<number>(`${profileSlice.name}/fetchProfileById`)
