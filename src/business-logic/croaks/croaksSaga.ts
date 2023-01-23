@@ -1,16 +1,26 @@
-import { takeEvery, call, put, StrictEffect } from "@redux-saga/core/effects"
+import { select, call, put, takeEvery } from "@redux-saga/core/effects"
 import { PayloadAction } from "@reduxjs/toolkit"
 import { getCroaksByUserId } from "../../api/croaksApi"
 import { ICroak } from "../../models/ICroak"
 import { IPaginator } from "../../models/IPaginator"
-import { fetchCroaks, mergePaginator } from "./croaksSlice"
+import { NotificationType } from "../../models/NotificationType"
+import { appendNotificationContainer } from "../notifications/notificationsSlice"
+import { selectCroaksPaginator } from "./croaksSelectors"
+import { fetchNextCroaksByUserId, mergePaginator, setIsLoading } from "./croaksSlice"
 
-export function *croaksWatcher(): Generator<StrictEffect> {
-    yield takeEvery(fetchCroaks.type, croaksWorker)
+export function *croaksWatcher() {
+    yield takeEvery(fetchNextCroaksByUserId.type, croaksWorker)
 }
 
-export function *croaksWorker(action: PayloadAction<number>): Generator<StrictEffect, void, IPaginator<ICroak>> {
-    const croaksPaginator: IPaginator<ICroak> = yield call(getCroaksByUserId, action.payload)
-
-    yield put(mergePaginator(croaksPaginator))
+export function *croaksWorker(action: PayloadAction<number>) {
+    yield put(setIsLoading(true))
+    try {
+        const croaksPaginator: IPaginator<ICroak> | undefined = yield select(selectCroaksPaginator)
+        const nextPage: number = croaksPaginator ? croaksPaginator.page + 1 : 1
+        const nextCroaksPaginator: IPaginator<ICroak> = yield call(getCroaksByUserId, action.payload, nextPage)
+        yield put(mergePaginator(nextCroaksPaginator))
+        yield put(setIsLoading(false))
+    } catch (err) {
+        yield put(appendNotificationContainer({type: NotificationType.ERROR, text: "Unable to load croaks ;("}))
+    }
 }
