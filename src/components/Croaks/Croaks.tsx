@@ -1,43 +1,35 @@
-import { FC, useEffect } from "react"
-import { useDispatch, useSelector } from "react-redux"
+import { FC } from "react"
 import { selectCroaksState } from "../../business-logic/croaks/croaksSelectors"
-import { fetchCroaks, ICroaksState } from "../../business-logic/croaks/croaksSlice"
-import { AppDispatch } from "../../store"
+import { fetchNextCroaksByUserId, ICroaksState, tearDown } from "../../business-logic/croaks/croaksSlice"
+import { croaksContainer } from "../../hocs/croaksContainer"
 import { Croak } from "../Croak/Croak"
+import { PreLoader } from "../PreLoader/PreLoader"
 
-interface ICroaksContainerProps {
-}
+import classes from "./Croaks.module.scss"
 
-interface ICroaksProps extends ICroaksContainerProps {
+export interface ICroaksProps {
     state: ICroaksState
 }
 
 export const Croaks: FC<ICroaksProps> = ({state}) => {
-    if (!state.paginator) {
-        return null
+    if (state.isLoading || !state.paginator) {
+        return <PreLoader />
     }
     
-    return <>
+    return <div className={ classes.container }>
         {
             state.paginator.items.map(croak => <Croak
                 key={ croak.id }
                 croak={ croak }
             />)
         }
-    </>
+    </div>
 }
 
-const CroaksContainer: FC<ICroaksContainerProps> = ({}) => {
-    const state = useSelector(selectCroaksState)
-    const dispatch: AppDispatch = useDispatch()
-
-    useEffect(() => {
-        dispatch(fetchCroaks(1))
-    }, [])
-
-    return <Croaks
-        state={ state }
-    />
-}
+const CroaksContainer: FC = croaksContainer(
+    selectCroaksState,
+    fetchNextCroaksByUserId,
+    tearDown
+)(Croaks)
 
 export default CroaksContainer
