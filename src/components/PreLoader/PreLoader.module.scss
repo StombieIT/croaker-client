@@ -1,0 +1,16 @@
+$preloaderSize: 70px;
+
+.icon {
+    width: $preloaderSize;
+    height: $preloaderSize;
+
+    margin: 40px auto;
+
+    animation: 1.5s round infinite linear;
+}
+
+@keyframes round {
+    100% {
+        transform: rotate(360deg);
+    }
+}
