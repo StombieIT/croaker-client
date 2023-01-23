@@ -12,6 +12,7 @@ import { NavBar } from "../NavBar/NavBar"
 import { PreLoader } from "../PreLoader/PreLoader"
 import Croaks from "../Croaks/Croaks"
 import ProfileHeader from "../ProfileHeader/ProfileHeader"
+import Replies from "../Replies/Replies"
 
 import classes from "./Profile.module.scss"
 
@@ -47,14 +48,11 @@ export const Profile: FC<IProfileProps> = ({state}) => {
             />
         </div>
         <NavBar className={ classes.navbar }>
-            <NavLink to={"/profile/croaks"}>
+            <NavLink to={`/profile/${state.profile.user.id}/croaks`}>
                 Croaks
             </NavLink>
-            <NavLink to="/profile/croaks-and-replies">
-                Croaks & Replies
-            </NavLink>
-            <NavLink to="/profile/media">
-                Media
+            <NavLink to={`/profile/${state.profile.user.id}/replies`}>
+                Replies
             </NavLink>
             <NavLink to="/profile/likes">
                 Likes
@@ -62,27 +60,32 @@ export const Profile: FC<IProfileProps> = ({state}) => {
         </NavBar>
         <Routes>
             <Route path="/croaks" element={ <Croaks /> } />
+            <Route path="/replies" element={ <Replies /> } />
         </Routes>
     </main>
 }
 
 const ProfileContainer: FC<IProfileContainerProps> = ({}) => {
     const { id } = useParams()
+    let parsedId: number | undefined
+    if (id) {
+        parsedId = parseInt(id)
+    }
     
     const dispatch: AppDispatch = useDispatch()
     
     const state: IProfileState = useSelector(selectProfileState)
     
     useEffect(() => {
-        if (id) {
-            dispatch(fetchProfileById(parseInt(id)))
+        if (parsedId) {
+            dispatch(fetchProfileById(parsedId))
         }
         return () => {
             dispatch(tearDown())
         }
     }, [id])
     
-    if (!id || !parseInt(id)) {
+    if (!parsedId) {
         return <Navigate to="/error/404" />
     }
 
