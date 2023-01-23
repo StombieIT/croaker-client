@@ -1,12 +1,14 @@
-$preloaderSize: 70px;
+$preloaderSize: 60px;
 
 .icon {
+    display: block;
+
     width: $preloaderSize;
     height: $preloaderSize;
 
     margin: 40px auto;
 
-    animation: 1.5s round infinite linear;
+    animation: 1s round infinite linear;
 }
 
 @keyframes round {
