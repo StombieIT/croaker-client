@@ -1,7 +1,7 @@
 import classNames from "classnames"
 import { FC, HTMLAttributes } from "react"
 
-import classes from "./PreLoader.module.css"
+import classes from "./PreLoader.module.scss"
 import preloaderIcon from "./preloaderIcon.png"
 
 interface IPreLoaderProps extends HTMLAttributes<HTMLImageElement> {
