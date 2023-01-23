@@ -11,7 +11,7 @@ export const App: FC = () => {
     return <div className={ classes.common }>
         <SideBar />
         <Routes>
-            <Route path="/profile/:id" element={ <Profile /> } />
+            <Route path="/profile/:id*" element={ <Profile /> } />
             <Route path="/error/:heading" element={ <ErrorBanner /> } />
             <Route path="/*" element={ <Navigate to="/error/404" /> } />
         </Routes>
