@@ -1,13 +1,4 @@
+import { api } from "./api"
 import { IProfile } from "../models/IProfile"
-import { dio, dioProfile } from "./fakeObjects"
 
-export const getProfileByUserId = (userId: number): Promise<IProfile> => new Promise((resolve, reject) => {
-    setTimeout(() => {
-        switch (userId) {
-            case dioProfile.user.id:
-                resolve(dioProfile)
-                break
-        }
-        reject()
-    }, 1_500)
-})
+export const getProfileById = (id: number) => api.get<IProfile>(`/profiles/${id}`).then(response => response.data)
