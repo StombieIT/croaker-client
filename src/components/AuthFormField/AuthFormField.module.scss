@@ -1,0 +1,41 @@
+@import "../../constants";
+@import "../../mixins";
+
+$errorColor: #F54135;
+
+.label {
+    margin: 5px;
+
+    border-bottom: 3px solid $widgetBorderColor;
+    
+    cursor: pointer;
+    
+    .input {
+        background-color: transparent;
+        
+        padding: 10px;
+        
+        font-size: 20px;
+
+        color: #42493a;
+
+        @include placeholder {
+            color: rgba(38, 45, 33, 0.2);
+        }
+    }
+}
+
+.invalid {
+    border-bottom: 3px solid $errorColor;
+}
+
+.errorsList {
+    list-style: none;
+
+    .error {
+        color: $errorColor;
+        font-weight: 500;
+
+        margin: 5px;
+    }
+}
