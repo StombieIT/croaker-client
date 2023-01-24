@@ -6,8 +6,8 @@ import { minLength } from "../../validators/minLength"
 
 export interface ILoginFormState {
     isValid: boolean,
-    username: IField<string>,
-    password: IField<string>
+    username: IField,
+    password: IField
 }
 
 const initialState: ILoginFormState = {
@@ -33,7 +33,7 @@ const loginFormSlice = createSlice({
     initialState,
     reducers: {
         changeUsername(state, action: PayloadAction<string>): void {
-            state.username.value = action.payload
+            state.username.value = action.payload.toLowerCase()
             validate(state)
         },
 
