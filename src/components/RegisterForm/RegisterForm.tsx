@@ -3,7 +3,8 @@ import { useDispatch, useSelector } from "react-redux"
 import { selectRegisterFormState } from "../../business-logic/registerForm/registerFormSelectors"
 import {
     changeUsername, changeRepeatedPassword,
-    changePassword, IRegisterFormState } from "../../business-logic/registerForm/registerFormSlice"
+    changePassword, IRegisterFormState
+} from "../../business-logic/registerForm/registerFormSlice"
 import { AppDispatch } from "../../store"
 import { AuthForm } from "../AuthForm/AuthForm"
 import { AuthFormField } from "../AuthFormField/AuthFormField"
