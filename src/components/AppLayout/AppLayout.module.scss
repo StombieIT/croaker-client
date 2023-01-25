@@ -1,4 +1,6 @@
-.common {
+@import "../../constants";
+
+.container {
     display: grid;
     grid-template-columns: 23fr 50fr 26fr;
 
@@ -6,5 +8,5 @@
     max-width: 1280px;
     min-height: 100%;
 
-    background-color: #DAFFE5;
+    background-color: $appColor;
 }
