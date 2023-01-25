@@ -6,6 +6,8 @@ $errorColor: #F54135;
 .label {
     margin: 5px;
 
+    width: 100%;
+
     border-bottom: 3px solid $widgetBorderColor;
     
     cursor: pointer;
@@ -13,6 +15,7 @@ $errorColor: #F54135;
     .input {
         background-color: transparent;
         
+        width: 100%;
         padding: 10px;
         
         font-size: 20px;

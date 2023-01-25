@@ -7,7 +7,7 @@ import classes from "./AuthForm.module.scss"
 
 interface IAuthFormProps {
     isValid: boolean,
-    children: Array<ReactElement<IAuthFormFieldProps>>,
+    children: ReactElement<IAuthFormFieldProps> | Array<ReactElement<IAuthFormFieldProps>>,
     buttonText: string,
     onSubmit?: () => void,
     className?: string,
@@ -22,7 +22,7 @@ export const AuthForm: FC<IAuthFormProps> = ({isValid, children, buttonText, onS
         }
     }
 
-    return <form {...props} className={ classes.form } onSubmit={ onFormSubmit } autoComplete="off">
+    return <form {...props} className={ classes.form } onSubmit={ onFormSubmit }>
         <Logo className={ classes.logo } />
         { children }
         <Button subType={ ButtonSubType.PRIMARY } className={ classes.button }>
