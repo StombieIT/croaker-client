@@ -6,6 +6,7 @@ import { croaksReducer } from "./business-logic/croaks/croaksSlice"
 import { loginFormReducer } from "./business-logic/loginForm/loginFormSlice"
 import { notificationsReducer } from "./business-logic/notifications/notificationsSlice"
 import { profileReducer } from "./business-logic/profile/profileSlice"
+import { registerFormReducer } from "./business-logic/registerForm/registerFormSlice"
 import { rootSaga } from "./business-logic/rootSaga"
 
 const sagaMiddleware = createSagaMiddleware()
@@ -16,7 +17,8 @@ export const store = configureStore({
         croaks: croaksReducer,
         profile: profileReducer,
         auth: authReducer,
-        loginForm: loginFormReducer
+        loginForm: loginFormReducer,
+        registerForm: registerFormReducer
     },
     middleware: getDefaultMiddleware => [
         ...getDefaultMiddleware({thunk: false}),
