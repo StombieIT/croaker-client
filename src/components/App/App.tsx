@@ -1,22 +1,33 @@
-import { FC } from "react"
+import { FC, useEffect } from "react"
 import { Routes, Route, Navigate } from "react-router-dom"
-import { SideBar } from "../SideBar/SideBar"
-import { NarrowColumn } from "../NarrowColumn/NarrowColumn"
+import { AppLayout } from "../AppLayout/AppLayout"
+import { Auth } from "../Auth/Auth"
+import { AppDispatch } from "../../store"
+import { useDispatch } from "react-redux"
+import { fetchUserByAuth } from "../../business-logic/auth/authSlice"
 import Profile from "../Profile/Profile"
 import ErrorBanner from "../ErrorBanner/ErrorBanner"
-import LoginForm from "../LoginForm/LoginForm"
-
-import classes from "./App.module.css"
+import AuthRequired from "../AuthRequired/AuthRequired"
 
 export const App: FC = () => {
-    return <div className={ classes.common }>
-        <SideBar />
-        <Routes>
-            <Route path="/profile/:id*" element={ <Profile /> } />
-            <Route path="/error/:heading" element={ <ErrorBanner /> } />
-            <Route path="/login-form" element={ <LoginForm /> } />
-            <Route path="/*" element={ <Navigate to="/error/404" /> } />
-        </Routes>
-        <NarrowColumn />
-    </div>
+    return <Routes>
+        <Route path="/auth/*" element={ <Auth /> } />
+        <Route path="/error/:heading" element={ <ErrorBanner /> } />
+        <Route path="/" element={ <AuthRequired><AppLayout /></AuthRequired> }>
+            <Route path="profile/:id/*" element={ <Profile /> } />
+            <Route path="*" element={ <Navigate to="/error/404" /> } />
+        </Route>
+    </Routes>
 }
+
+const AppContainer: FC = () => {
+    const dispatch: AppDispatch = useDispatch()
+    
+    useEffect(() => {
+        dispatch(fetchUserByAuth())
+    }, [])
+    
+    return <App />
+}
+
+export default AppContainer
