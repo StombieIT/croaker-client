@@ -1,6 +1,7 @@
 import { FC } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { selectLoginFormState } from "../../business-logic/loginForm/loginFormSelectors"
+import { sendLogin } from "../../business-logic/auth/authSlice"
 import { changePassword, changeUsername, ILoginFormState } from "../../business-logic/loginForm/loginFormSlice"
 import { AppDispatch } from "../../store"
 import { AuthForm } from "../AuthForm/AuthForm"
@@ -10,8 +11,11 @@ const LoginFormContainer: FC = () => {
     const state: ILoginFormState = useSelector(selectLoginFormState)
     const dispatch: AppDispatch = useDispatch()
 
-    return <div>
-        <AuthForm isValid={ state.isValid } buttonText="Login">
+    return <AuthForm
+        onSubmit={ () => dispatch(sendLogin({username: state.username.value, password: state.password.value})) }
+        isValid={ state.isValid }
+        buttonText="Login"
+    >
         <AuthFormField
             name="username"
             type="text"
@@ -27,7 +31,6 @@ const LoginFormContainer: FC = () => {
             onChange={ password => dispatch(changePassword(password)) }
         />
     </AuthForm>
-    </div>
 }
 
 export default LoginFormContainer
