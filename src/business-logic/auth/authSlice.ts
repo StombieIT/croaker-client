@@ -4,15 +4,22 @@ import { ILoginContainer } from "../../models/ILoginContainer"
 import { IUser } from "../../models/IUser"
 
 export interface IAuthState {
+    isLoading: boolean,
     user?: IUser
 }
 
-const initialState: IAuthState = {}
+const initialState: IAuthState = {
+    isLoading: false
+}
 
 export const authSlice = createSlice({
     name: "auth",
     initialState,
     reducers: {
+        setIsLoading(state, action: PayloadAction<boolean>): void {
+            state.isLoading = action.payload
+        },
+
         setUser(state, action: PayloadAction<IUser>): void {
             state.user = action.payload
         },
@@ -25,6 +32,7 @@ export const authSlice = createSlice({
 
 export const authReducer = authSlice.reducer
 
-export const { setUser, tearDown } = authSlice.actions
+export const { setIsLoading , setUser, tearDown } = authSlice.actions
 
 export const sendLogin = createAction<ILoginContainer>(`${authSlice.name}/sendLogin`)
+export const fetchUserByAuth = createAction(`${authSlice.name}/fetchUserByAuth`)
