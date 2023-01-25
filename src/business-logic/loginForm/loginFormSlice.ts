@@ -1,8 +1,8 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 import { WritableDraft } from "immer/dist/internal"
 import { IField } from "../../models/IField"
-import { mergeValidators } from "../../utils/mergeValidators"
-import { minLength } from "../../validators/minLength"
+import { validatePassword } from "../../utils/validatePassword"
+import { validateUsername } from "../../utils/validateUsername"
 
 export interface ILoginFormState {
     isValid: boolean,
@@ -23,8 +23,8 @@ const initialState: ILoginFormState = {
 }
 
 const validate = (state: WritableDraft<ILoginFormState>): void => {
-    state.username.errors = mergeValidators(minLength(5))(state.username.value)
-    state.password.errors = mergeValidators(minLength(8))(state.password.value)
+    state.username.errors = validateUsername(state.username.value)
+    state.password.errors = validatePassword(state.password.value)
     state.isValid = !state.username.errors.length && !state.password.errors.length
 }
 
