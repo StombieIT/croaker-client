@@ -1,0 +1,13 @@
+@import "../../constants";
+
+.banner {
+    padding: 15px;
+
+    border: 2px solid $widgetBorderColor;
+    border-radius: 10px;
+
+    background: $widgetBackground;
+    color: #42493a;
+
+    text-align: center;
+}
