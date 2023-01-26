@@ -6,6 +6,7 @@ import { PassedTime } from "../PassedTime/PassedTime"
 
 import classes from "./Croak.module.scss"
 import { Username } from "../Username/Username"
+import { Avatar } from "../Avatar/Avatar"
 
 interface ICroakProps {
     croak: ICroak,
@@ -21,13 +22,11 @@ export const Croak: FC<ICroakProps> = ({
     onRecroaksClick
 }) => {
     return <article className={ classes.container }>
-        <div className={ classes.avatarWrapper }>
-            <img
-                className={ classes.avatar }
-                src={ croak.author.avatarLink ?? undefined }
-                alt={`${croak.author.username} avatar`}
-            />
-        </div>
+        <Avatar
+            className={ classes.avatarWrapper }
+            src={ croak.author.avatarLink ?? undefined }
+            alt={ `${croak.author.username} avatar` }
+        />
         <div className={ classes.content }>
             <header className={ classes.header }>
                 <h4 className={ classes.name }>{ croak.author.name }</h4>
