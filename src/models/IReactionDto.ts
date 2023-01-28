@@ -1,4 +1,5 @@
-export interface IReactionDto {
-    count: number,
-    isActive: boolean
+import { IActivable } from "./IActivable"
+
+export interface IReactionDto extends IActivable {
+    count: number
 }
