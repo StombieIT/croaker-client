@@ -3,12 +3,12 @@ import { ICroak } from "../../models/ICroak"
 import { ReactionsBar } from "../ReactionsBar/ReactionsBar"
 import { MediaGrid } from "../MediaGrid/MediaGrid"
 import { PassedTime } from "../PassedTime/PassedTime"
-
-import classes from "./Croak.module.scss"
 import { Username } from "../Username/Username"
 import { Avatar } from "../Avatar/Avatar"
 
-interface ICroakProps {
+import classes from "./Croak.module.scss"
+
+export interface ICroakProps {
     croak: ICroak,
     onLikesClick?: () => void,
     onCommentsClick?: () => void,
