@@ -1,0 +1,30 @@
+@use "../../constants";
+
+$replyIconSize: 17px;
+
+.wrapper {
+    display: inline-block;
+
+    position: relative;
+
+    margin: 5px;
+    
+    .heading {
+        display: flex;
+        align-items: center;
+
+        cursor: pointer;
+
+        color: constants.$activeColor;
+
+        font-size: constants.$mediumFontSize;
+        font-weight: 500;
+
+        .replyIcon {
+            margin: 5px;
+
+            height: $replyIconSize;
+            width: $replyIconSize;
+        }
+    }
+}
