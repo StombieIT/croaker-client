@@ -10,7 +10,7 @@ import { useDispatch } from "react-redux"
 import classes from "./OriginalCroak.module.scss"
 
 interface IOriginalCroakContainerProps {
-    originalCroak: Partial<ICroak>  & IIdentifiable
+    originalCroak: Partial<ICroak> & IIdentifiable
 }
 
 interface IOriginalCroakProps extends IOriginalCroakContainerProps {
