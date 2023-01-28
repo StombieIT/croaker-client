@@ -22,6 +22,7 @@ export const ReplyingTo: FC<IReplyingToProps> = ({originalCroak, setOriginalCroa
             <img
                 className={ classes.replyIcon }
                 src={ replyIcon }
+                alt="Reply icon"
             />
             replying to
         </h5>
