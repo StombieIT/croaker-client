@@ -1,5 +1,7 @@
+@use "../../constants";
+
 .container {
-    & > * {
-        margin: 7px;
-    }
+    display: flow-root;
+
+    background-color: constants.$mainDarkerColor;
 }
