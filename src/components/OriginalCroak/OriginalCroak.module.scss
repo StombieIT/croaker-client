@@ -1,0 +1,17 @@
+@use "../../constants";
+
+.container {
+    position: absolute;
+
+    padding: 10px;
+
+    background-color: constants.$mainColor;
+
+    border: 1px solid constants.$mainBorderColor;
+    border-radius: 10px;
+
+    left: 50%;
+    top: 0;
+
+    transform: translate(-50%, -100%);
+}
