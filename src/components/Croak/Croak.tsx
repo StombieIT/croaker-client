@@ -46,7 +46,7 @@ export const Croak: FC<ICroakProps> = ({
                 onCommentsClick={ onCommentsClick }
                 replies={ croak.replies }
                 onRepliesClick={ onRecroaksClick }
-                className={ classes.activitiesBar }
+                className={ classes.reactionsBar }
                 approximately
             />
         </div>
