@@ -3,7 +3,6 @@ import { Login } from "./Login"
 import { ILoginFormState } from "../../business-logic/loginForm/loginFormSlice"
 
 jest.mock("react-router-dom", () => ({
-    ...jest.requireActual("react-router-dom"),
     Link: () => null
 }))
 
@@ -27,7 +26,7 @@ describe("Login component tests", () => {
 
     })
 
-    test("fields changing", () => {
+    test("changing fields", () => {
         render(
             <Login
                 form={ form }
