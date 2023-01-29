@@ -24,7 +24,6 @@ describe("Login component tests", () => {
                 errors: []
             }
         }
-
     })
 
     test("changing fields", () => {
