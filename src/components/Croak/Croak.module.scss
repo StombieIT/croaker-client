@@ -6,8 +6,6 @@ $commonMarginSize: 3px;
 
     font-size: 12px;
 
-    height: fit-content;
-
     .avatarWrapper {
         flex-shrink: 0;
 
@@ -23,10 +21,6 @@ $commonMarginSize: 3px;
         overflow: hidden;
 
         transition: 0.3s box-shadow;
-        
-        &:hover {
-            box-shadow: -5px 5px 5px #00000040;
-        }
 
         .avatar {
             height: 100%;
@@ -68,7 +62,7 @@ $commonMarginSize: 3px;
             width: 100%;
         }
 
-        .activitiesBar {
+        .reactionsBar {
             display: inline-flex;
             align-items: center;
             gap: 20px;
@@ -76,4 +70,8 @@ $commonMarginSize: 3px;
             margin: $commonMarginSize;
         }
     }
+}
+
+.skeleton {
+    min-width: 350px;
 }
