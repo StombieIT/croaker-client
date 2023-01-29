@@ -1,3 +1,4 @@
+import "@testing-library/jest-dom"
 import { render, screen, fireEvent } from "@testing-library/react"
 import { Login } from "./Login"
 import { ILoginFormState } from "../../business-logic/loginForm/loginFormSlice"
@@ -83,5 +84,35 @@ describe("Login component tests", () => {
         fireEvent.click(screen.getByRole("button"))
 
         expect(mockedFormSubmit).not.toBeCalled()
+    })
+
+    test("showing errors", () => {
+        form.username = {
+            value: "ficko",
+            errors: [
+                "Username cannot be ficko",
+                "Username must contains at least 10 symbols"
+            ]
+        }
+
+        form.password = {
+            value: "123456",
+            errors: [
+                "Password cannot be such simple",
+                "Password must contains at least 8 symbols"
+            ]
+        }
+
+        render(
+            <Login
+                form={ form }
+                onUsernameChange={ mockedUsernameChange }
+                onPasswordChange={ mockedPasswordChange }
+            />
+        )
+
+        form.username.errors.forEach(error => {
+            expect(screen.getByText(error)).toBeInTheDocument()
+        })
     })
 })
