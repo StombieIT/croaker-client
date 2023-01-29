@@ -2,7 +2,7 @@
 
 .container {
     position: absolute;
-
+    
     padding: 10px;
 
     background-color: constants.$mainColor;
@@ -14,4 +14,8 @@
     top: 0;
 
     transform: translate(-50%, -100%);
+}
+
+.skeleton {
+    min-width: 25vw;
 }

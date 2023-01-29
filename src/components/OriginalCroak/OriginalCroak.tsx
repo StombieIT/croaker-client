@@ -1,11 +1,11 @@
 import { FC, useEffect } from "react"
+import { useDispatch } from "react-redux"
 import { ICroak, isICroak } from "../../models/ICroak"
 import { IIdentifiable } from "../../models/IIdentifiable"
-import { PreLoader } from "../PreLoader/PreLoader"
 import { Croak } from "../Croak/Croak"
 import { AppDispatch } from "../../store"
 import { fetchOriginalCroakById } from "../../business-logic/croaks/croaksSlice"
-import { useDispatch } from "react-redux"
+import { SkeletonCroak } from "../Croak/SkeletonCroak"
 
 import classes from "./OriginalCroak.module.scss"
 
@@ -27,7 +27,7 @@ export const OriginalCroak: FC<IOriginalCroakProps> = ({originalCroak, ...props}
                 {...props}
                 croak={ originalCroak }
             />
-            : <PreLoader />
+            : <SkeletonCroak />
         }
     </div>
 }
