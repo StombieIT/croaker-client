@@ -111,8 +111,10 @@ describe("Login component tests", () => {
             />
         )
 
-        form.username.errors.forEach(error => {
-            expect(screen.getByText(error)).toBeInTheDocument()
-        })
+        Array.of(form.username.errors, form.username.errors)
+            .flatMap(errors => errors)
+            .forEach(error => {
+                expect(screen.getByText(error)).toBeInTheDocument()
+            })
     })
 })
