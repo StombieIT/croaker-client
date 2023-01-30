@@ -109,4 +109,5 @@ export const {
 
 export const fetchNextCroaksByUserId = createAction<number>(`${croaksSlice.name}/fetchNextCroaksByUserId`)
 export const fetchNextRepliesByUserId = createAction<number>(`${croaksSlice.name}/fetchNextRepliesByUserId`)
+export const fetchNextLikesByUserId = createAction<number>(`${croaksSlice.name}/fetchNextLikesByUserId`)
 export const fetchOriginalCroakById = createAction<number>(`${croaksSlice.name}/fetchOriginalCroakById`)
