@@ -13,6 +13,7 @@ import { PreLoader } from "../PreLoader/PreLoader"
 import Croaks from "../Croaks/Croaks"
 import ProfileHeader from "../ProfileHeader/ProfileHeader"
 import Replies from "../Replies/Replies"
+import Likes from "../Likes/Likes"
 
 import classes from "./Profile.module.scss"
 
@@ -54,13 +55,14 @@ export const Profile: FC<IProfileProps> = ({state}) => {
             <NavLink to={`/profile/${state.profile.user.id}/replies`}>
                 Replies
             </NavLink>
-            <NavLink to="/profile/likes">
+            <NavLink to={`/profile/${state.profile.user.id}/likes`}>
                 Likes
             </NavLink>
         </NavBar>
         <Routes>
             <Route path="/croaks" element={ <Croaks /> } />
             <Route path="/replies" element={ <Replies /> } />
+            <Route path="/likes" element={ <Likes /> } />
         </Routes>
     </main>
 }
