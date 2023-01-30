@@ -1,13 +1,13 @@
 import { FC } from "react"
 import { selectCroaksState } from "../../business-logic/croaks/croaksSelectors"
-import { fetchNextRepliesByUserId, tearDown } from "../../business-logic/croaks/croaksSlice"
+import { fetchNextLikesByUserId, tearDown } from "../../business-logic/croaks/croaksSlice"
 import { croaksContainer } from "../../hocs/croaksContainer"
 import { Croaks } from "../Croaks/Croaks"
 
-const RepliesContainer: FC = croaksContainer(
+const LikesContainer: FC = croaksContainer(
     selectCroaksState,
-    fetchNextRepliesByUserId,
+    fetchNextLikesByUserId,
     tearDown
 )(Croaks)
 
-export default RepliesContainer
+export default LikesContainer
