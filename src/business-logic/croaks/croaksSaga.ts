@@ -7,27 +7,44 @@ import { NotificationType } from "../../models/NotificationType"
 import { appendNotificationContainer } from "../notifications/notificationsSlice"
 import { selectCroaksPaginator } from "./croaksSelectors"
 import {
-    fetchNextCroaksByUserId, fetchOriginalCroakById,
-    mergePaginator, setIsLoading, garbleOriginalCroak
+    fetchNextCroaksByUserId, fetchNextRepliesByUserId,
+    fetchNextLikesByUserId, fetchOriginalCroakById,
+    mergePaginator, setIsLoading, garbleOriginalCroak,
 } from "./croaksSlice"
+import { GetPaginatorApiMethod } from "../../models/GetPaginatorApiMethod"
+import { IIdentifiable } from "../../models/IIdentifiable"
 import * as croaksApi from "../../api/croaksApi"
 
 export function *croaksWatcher() {
     yield takeLatest(fetchNextCroaksByUserId.type, fetchNextCroaksByUserIdWorker)
+    yield takeLatest(fetchNextRepliesByUserId.type, fetchNextRepliesByUserIdWorker)
+    yield takeLatest(fetchNextLikesByUserId.type, fetchNextLikesByUserIdWorker)
     yield takeLeading(fetchOriginalCroakById.type, fetchOriginalCroakByIdWorker)
 }
 
-export function *fetchNextCroaksByUserIdWorker(action: PayloadAction<number>) {
+export function *fetchNextByIdWorker(action: PayloadAction<number>, getByUserId: GetPaginatorApiMethod<ICroakDto, IIdentifiable>) {
     yield put(setIsLoading(true))
     try {
         const croaksPaginator: IPaginator<ICroak> | undefined = yield select(selectCroaksPaginator)
         const nextPage: number = croaksPaginator ? croaksPaginator.page + 1 : 1
-        const nextCroaksPaginator: IPaginator<ICroakDto> = yield call(croaksApi.getCroaksByUserId, action.payload, nextPage)
+        const nextCroaksPaginator: IPaginator<ICroakDto> = yield call(getByUserId, {id: action.payload, page: nextPage})
         yield put(mergePaginator({...nextCroaksPaginator, items: nextCroaksPaginator.items.map(fromDto)}))
         yield put(setIsLoading(false))
     } catch (err) {
         yield put(appendNotificationContainer({type: NotificationType.ERROR, text: "Unable to load croaks ;("}))
     }
+}
+
+export function *fetchNextCroaksByUserIdWorker(action: PayloadAction<number>) {
+    yield call(fetchNextByIdWorker, action, croaksApi.getCroaksByUserId)
+}
+
+export function *fetchNextRepliesByUserIdWorker(action: PayloadAction<number>) {
+    yield call(fetchNextByIdWorker, action, croaksApi.getRepliesByUserId)
+}
+
+export function *fetchNextLikesByUserIdWorker(action: PayloadAction<number>) {
+    yield call(fetchNextByIdWorker, action, croaksApi.getLikesByUserId)
 }
 
 export function *fetchOriginalCroakByIdWorker(action: PayloadAction<number>) {
