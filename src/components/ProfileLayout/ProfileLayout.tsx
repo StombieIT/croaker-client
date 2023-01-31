@@ -3,7 +3,7 @@ import { useParams, Outlet } from "react-router-dom"
 import { NavLink, Navigate } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"
 import { selectProfileState } from "../../business-logic/profile/profileSelectors"
-import { fetchProfileById, IProfileState, tearDown } from "../../business-logic/profile/profileSlice"
+import { fetchFullProfileById, IProfileState, tearDown } from "../../business-logic/profile/profileSlice"
 import { AppDispatch } from "../../store"
 import { ImageWrapper, ImageWrapperType } from "../ImageWrapper/ImageWrapper"
 import { ProfileInteractionBar } from "../ProfileInteractionBar/ProfileInteractionBar"
@@ -70,12 +70,12 @@ const ProfileLayoutContainer: FC = () => {
     
     useEffect(() => {
         if (parsedId) {
-            dispatch(fetchProfileById(parsedId))
+            dispatch(fetchFullProfileById(parsedId))
         }
         return () => {
             dispatch(tearDown())
         }
-    }, [id])
+    }, [parsedId])
     
     if (!parsedId) {
         return <Navigate to="/error/404" />
