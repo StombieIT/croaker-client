@@ -1,12 +1,7 @@
-import { IUser } from "./IUser"
+import { IActivable } from "./IActivable"
+import { ILoadable } from "./ILoadable"
+import { IProfileDto } from "./IProfileDto"
 
-export interface IProfile {
-    user: IUser,
-    description: string | null,
-    city: string,
-    country: string,
-    followersCount: number,
-    croaksCount: number,
-    followingCount: number,
-    backgroundImageLink: string | null
+export interface IProfile extends IProfileDto {
+    follow: ILoadable & Partial<IActivable>
 }
