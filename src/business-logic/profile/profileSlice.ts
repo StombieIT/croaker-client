@@ -1,8 +1,8 @@
 import { createAction, createSlice, PayloadAction } from "@reduxjs/toolkit"
+import { ILoadable } from "../../models/ILoadable"
 import { IProfile } from "../../models/IProfile"
 
-export interface IProfileState {
-    isLoading: boolean,
+export interface IProfileState extends ILoadable {
     profile?: IProfile
 }
 
@@ -22,6 +22,18 @@ export const profileSlice = createSlice({
             state.profile = action.payload
         },
 
+        setFollowIsActive(state, action: PayloadAction<boolean>): void {
+            if (state.profile) {
+                state.profile.follow.isActive = action.payload
+            }
+        },
+
+        setFollowIsLoading(state, action: PayloadAction<boolean>): void {
+            if (state.profile) {
+                state.profile.follow.isLoading = action.payload
+            }
+        },
+
         tearDown(state): IProfileState {
             return initialState
         }
@@ -30,6 +42,9 @@ export const profileSlice = createSlice({
 
 export const profileReducer = profileSlice.reducer
 
-export const { setIsLoading, setProfile, tearDown } = profileSlice.actions
+export const {
+    setIsLoading, setProfile, tearDown,
+    setFollowIsActive, setFollowIsLoading
+} = profileSlice.actions
 
-export const fetchProfileById = createAction<number>(`${profileSlice.name}/fetchProfileById`)
+export const fetchFullProfileById = createAction<number>(`${profileSlice.name}/fetchProfileById`)
