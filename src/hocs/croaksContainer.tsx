@@ -29,7 +29,7 @@ export const croaksContainer = (
         return () => {
             dispatch(tearDown())
         }
-    }, [id])
+    }, [parsedId])
 
     const state = useSelector(selectCroaksState)
 
