@@ -1,5 +1,5 @@
 import { FC, useEffect } from "react"
-import { Routes, Route, useParams } from "react-router-dom"
+import { useParams, Outlet } from "react-router-dom"
 import { NavLink, Navigate } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"
 import { selectProfileState } from "../../business-logic/profile/profileSelectors"
@@ -10,21 +10,15 @@ import { ProfileInteractionBar } from "../ProfileInteractionBar/ProfileInteracti
 import { ProfileUserInfo } from "../ProfileInfo/ProfileInfo"
 import { NavBar } from "../NavBar/NavBar"
 import { PreLoader } from "../PreLoader/PreLoader"
-import Croaks from "../Croaks/Croaks"
 import ProfileHeader from "../ProfileHeader/ProfileHeader"
-import Replies from "../Replies/Replies"
-import Likes from "../Likes/Likes"
 
-import classes from "./Profile.module.scss"
+import classes from "./ProfileLayout.module.scss"
 
-interface IProfileContainerProps {
-}
-
-interface IProfileProps extends IProfileContainerProps {
+interface IProfileLayoutProps {
     state: IProfileState
 }
 
-export const Profile: FC<IProfileProps> = ({state}) => {
+export const ProfileLayout: FC<IProfileLayoutProps> = ({state}) => {
     if (state.isLoading || !state.profile) {
         return <PreLoader />
     }
@@ -59,15 +53,11 @@ export const Profile: FC<IProfileProps> = ({state}) => {
                 Likes
             </NavLink>
         </NavBar>
-        <Routes>
-            <Route path="/croaks" element={ <Croaks /> } />
-            <Route path="/replies" element={ <Replies /> } />
-            <Route path="/likes" element={ <Likes /> } />
-        </Routes>
+        <Outlet />
     </main>
 }
 
-const ProfileContainer: FC<IProfileContainerProps> = ({}) => {
+const ProfileLayoutContainer: FC = () => {
     const { id } = useParams()
     let parsedId: number | undefined
     if (id) {
@@ -91,9 +81,9 @@ const ProfileContainer: FC<IProfileContainerProps> = ({}) => {
         return <Navigate to="/error/404" />
     }
 
-    return <Profile
+    return <ProfileLayout
         state={ state }
     />
 }
 
-export default ProfileContainer
+export default ProfileLayoutContainer
