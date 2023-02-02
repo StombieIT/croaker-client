@@ -6,8 +6,8 @@ import { selectProfileState } from "../../business-logic/profile/profileSelector
 import { fetchFullProfileById, IProfileState, tearDown } from "../../business-logic/profile/profileSlice"
 import { AppDispatch } from "../../store"
 import { ImageWrapper, ImageWrapperType } from "../ImageWrapper/ImageWrapper"
-import { ProfileInteractionBar } from "../ProfileInteractionBar/ProfileInteractionBar"
-import { ProfileUserInfo } from "../ProfileInfo/ProfileInfo"
+import ProfileInteractionBar from "../ProfileInteractionBar/ProfileInteractionBar"
+import { ProfileInfo } from "../ProfileInfo/ProfileInfo"
 import { NavBar } from "../NavBar/NavBar"
 import { PreLoader } from "../PreLoader/PreLoader"
 import ProfileHeader from "../ProfileHeader/ProfileHeader"
@@ -37,8 +37,9 @@ export const ProfileLayout: FC<IProfileLayoutProps> = ({state}) => {
         <div className={ classes.content }>
             <ProfileInteractionBar
                 user={ state.profile.user }
+                follow={ state.profile.follow }
             />
-            <ProfileUserInfo
+            <ProfileInfo
                 profile={ state.profile }
             />
         </div>
