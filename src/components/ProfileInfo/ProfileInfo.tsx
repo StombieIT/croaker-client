@@ -11,7 +11,7 @@ interface IProfileInfoProps {
     profile: IProfile
 }
 
-export const ProfileUserInfo: FC<IProfileInfoProps> = ({profile}) => {
+export const ProfileInfo: FC<IProfileInfoProps> = ({profile}) => {
     return <div className={ classes.info }>
         <h4 className={ classes.name }>
             { profile.user.name }
