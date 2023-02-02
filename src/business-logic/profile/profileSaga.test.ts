@@ -1,4 +1,4 @@
-import { FetchError } from "../../models/FetchError"
+import { ServerError } from "../../models/ServerError"
 import { IProfileDto } from "../../models/IProfileDto"
 import {
     fetchProfileByIdWorker,
@@ -25,7 +25,7 @@ describe("fetch profile by id worker tests", () => {
 
     test("unsuccessful fetching", () => {
         workerGenerator.next()
-        expect(() => workerGenerator.throw(new Error())).toThrow(FetchError)
+        expect(() => workerGenerator.throw(new Error())).toThrow(ServerError)
     })
 })
 
@@ -45,6 +45,6 @@ describe("fetch profile follow is active by id worker tests", () => {
 
     test("unsuccessful fetching", () => {
         workerGenerator.next()
-        expect(() => workerGenerator.throw(new Error())).toThrow(FetchError)
+        expect(() => workerGenerator.throw(new Error())).toThrow(ServerError)
     })
 })
