@@ -48,3 +48,4 @@ export const {
 } = profileSlice.actions
 
 export const fetchFullProfileById = createAction<number>(`${profileSlice.name}/fetchProfileById`)
+export const toggleProfileFollowIsActive = createAction(`${profileSlice.name}/toggleProfileFollowIsActive`)
