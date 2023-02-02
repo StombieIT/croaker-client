@@ -3,5 +3,5 @@ import { ILoadable } from "./ILoadable"
 import { IProfileDto } from "./IProfileDto"
 
 export interface IProfile extends IProfileDto {
-    follow: ILoadable & Partial<IActivable>
+    follow: ILoadable & IActivable
 }
