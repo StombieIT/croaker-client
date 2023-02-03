@@ -1,39 +1,43 @@
-import classNames from "classnames"
 import { FC } from "react"
-import { NavLink, To } from "react-router-dom"
-import { NavFactoryMethod } from "../../models/NavFactoryMethod"
+import classNames from "classnames"
+import { PathnameUnit } from "../../models/PathnameUnit"
+import { Pathname } from "../../models/Pathname"
+import TriggerLink from "../TriggerLink/TriggerLink"
 
 import classes from "./SideBarLink.module.scss"
 
 interface ISideBarLinkProps {
-    to: To,
-    iconSrc: NavFactoryMethod<string>,
-    iconAlt?: NavFactoryMethod<string>,
+    to: Pathname,
+    iconSrc: (isActive: boolean) => string,
+    iconAlt?: (isActive: boolean) => string,
     children: string
 }
 
 export const SideBarLink: FC<ISideBarLinkProps> = ({
     to,
     iconSrc,
-    iconAlt = props => children + (props.isActive ? " active" : "") + " icon",
+    iconAlt = isActive => `${children} ${isActive ? "active " : ""}icon`,
     children
 }) => {
     const consideredLinkClass = (isActive: boolean): string => classNames(classes.common, {
         [classes.notActive]: !isActive,
         [classes.active]: isActive
     })
+    
+    const toPathnames = to.split(PathnameUnit.SEPARATOR).filter(toPathname => !!toPathname)
 
-    return <NavLink
-        className={ ({isActive}) => consideredLinkClass(isActive)}
+    return <TriggerLink
+        when={ pathname => pathname.startsWith(`${PathnameUnit.SEPARATOR}${toPathnames.at(0) ?? ""}`) }
+        className={ consideredLinkClass }
         to={ to }
     >
         {
-            props => <>
+            isActive => <>
                 <div className={ classes.iconContainer }>
                     <img
+                        src={ iconSrc(isActive) }
+                        alt={ iconAlt(isActive) }
                         className={ classes.icon }
-                        src={ iconSrc(props) }
-                        alt={ iconAlt(props) }
                     />
                 </div>
                 <div className={ classes.childrenContainer }>
@@ -41,5 +45,5 @@ export const SideBarLink: FC<ISideBarLinkProps> = ({
                 </div>
             </>
         }
-    </NavLink>
+    </TriggerLink>
 }
