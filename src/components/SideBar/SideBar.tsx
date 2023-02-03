@@ -16,13 +16,13 @@ export const SideBar: FC = () => {
         <Logo className={ classes.logo } />
         <SideBarLink
             to="/explore"
-            iconSrc={ ({isActive}) => isActive ? exploreActiveIcon : exploreIcon }
+            iconSrc={ isActive => isActive ? exploreActiveIcon : exploreIcon }
         >
             Explore
         </SideBarLink>
         <SideBarLink
             to="/profile"
-            iconSrc={ ({isActive}) => isActive ? profileActiveIcon : profileIcon }
+            iconSrc={ isActive => isActive ? profileActiveIcon : profileIcon }
         >
             Profile
         </SideBarLink>
