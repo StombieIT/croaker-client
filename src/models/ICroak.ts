@@ -11,7 +11,8 @@ export interface ICroak extends ICroakBase {
     originalCroak?: Partial<ICroak> & IActivable & IIdentifiable
 }
 
-export const isICroak = (croak: Partial<ICroak>): croak is ICroak =>
+// TODO: make deep checking
+export const isICroak = (croak: any): croak is ICroak =>
     croak.id !== undefined &&
     croak.text !== undefined &&
     croak.creationDate !== undefined &&
