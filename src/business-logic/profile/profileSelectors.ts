@@ -1,3 +1,4 @@
+import { createSelector } from "@reduxjs/toolkit"
 import { IActivable } from "../../models/IActivable"
 import { ILoadable } from "../../models/ILoadable"
 import { IUser } from "../../models/IUser"
@@ -6,6 +7,17 @@ import { IProfileState } from "./profileSlice"
 
 export const selectProfileState = (state: RootState): IProfileState => state.profile
 
+export const selectProfile = createSelector(selectProfileState, state => state.profile)
+
 export const selectProfileUser = (state: RootState): IUser | undefined => state.profile.profile?.user
 
 export const selectProfileFollow = (state: RootState): ILoadable & IActivable | undefined => state.profile.profile?.follow
+
+export const selectProfileFollows = createSelector(selectProfile, (profile) => {
+    if (profile) {
+        return {
+            followersCount: profile.followersCount,
+            followingCount: profile.followingCount
+        }
+    }
+})
