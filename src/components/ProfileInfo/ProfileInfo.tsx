@@ -1,7 +1,7 @@
 import { FC } from "react"
 import { IProfile } from "../../models/IProfile"
 import { OrdinaryParagraph } from "../OrdinaryParagraph/OrdinaryParagraph"
-import { ProfileFollows } from "../ProfileFollows/ProfileFollows"
+import ProfileFollows from "../ProfileFollows/ProfileFollows"
 import { ProfileMeta } from "../ProfileMeta/ProfileMeta"
 import { Username } from "../Username/Username"
 
@@ -28,9 +28,6 @@ export const ProfileInfo: FC<IProfileInfoProps> = ({profile}) => {
             country={ profile.country }
             registrationDate={ profile.user.registrationDate }
         />
-        <ProfileFollows
-            followersCount={ profile.followersCount }
-            followingCount={ profile.followingCount }
-        />
+        <ProfileFollows />
     </div>
 }
