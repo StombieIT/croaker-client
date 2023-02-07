@@ -30,3 +30,14 @@ export const selectProfileHeader = createSelector(selectProfile, profile => {
         }
     }
 })
+
+export const selectProfileMeta = createSelector(selectProfile, profile => {
+    if (profile) {
+        return {
+            userId: profile.user.id,
+            city: profile.city,
+            country: profile.country,
+            registrationDate: profile.user.registrationDate
+        }
+    }
+})
