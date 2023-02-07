@@ -1,4 +1,7 @@
 import { FC } from "react"
+import { useDispatch } from "react-redux"
+import { toggleLikesIsActiveByCroakId } from "../../business-logic/croaks/croaksSlice"
+import { AppDispatch } from "../../store"
 import { ICroak } from "../../models/ICroak"
 import { ReactionsBar } from "../ReactionsBar/ReactionsBar"
 import { MediaGrid } from "../MediaGrid/MediaGrid"
@@ -8,8 +11,11 @@ import { Avatar } from "../Avatar/Avatar"
 
 import classes from "./Croak.module.scss"
 
-export interface ICroakProps {
-    croak: ICroak,
+interface ICroakContainerProps {
+    croak: ICroak
+}
+
+export interface ICroakProps extends ICroakContainerProps {
     onLikesClick?: () => void,
     onCommentsClick?: () => void,
     onRecroaksClick?: () => void
@@ -52,3 +58,14 @@ export const Croak: FC<ICroakProps> = ({
         </div>
     </article>
 }
+
+const CroakContainer: FC<ICroakContainerProps> = props => {
+    const dispatch: AppDispatch = useDispatch()
+    
+    return <Croak
+        {...props}
+        onLikesClick={ () => dispatch(toggleLikesIsActiveByCroakId(props.croak.id)) }
+    />
+}
+
+export default CroakContainer
