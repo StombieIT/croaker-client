@@ -1,6 +1,7 @@
 import { createAction, createSlice, PayloadAction } from "@reduxjs/toolkit"
 import { WritableDraft } from "immer/dist/internal"
-import { ICroak } from "../../models/ICroak"
+import { IReactionDto } from "../../models/IReactionDto"
+import { ICroak, isICroak } from "../../models/ICroak"
 import { IPaginator } from "../../models/IPaginator"
 
 export interface ICroaksState {
@@ -48,34 +49,34 @@ const croaksSlice = createSlice({
             state.paginator.items.forEach(croak => garble(state, croak))
         },
 
-        toggleLikesIsActive(state, action: PayloadAction<number>): void {
-            if (state.paginator) {
-                state.paginator.items.forEach(croak => {
-                    if (croak.id === action.payload) {
-                        croak.likes.isActive = !croak.likes.isActive
-                    }
-                })
-            }
+        /**
+         * Sets @param isLoading status to all croaks and original croaks
+         * with @param id if they present
+         * */
+        setLikesIsLoadingByCroakId(state, action: PayloadAction<{id: number, isLoading: boolean}>): void {
+            state.paginator?.items.forEach(croak => {
+                if (action.payload.id === croak.originalCroak?.id && isICroak(croak.originalCroak)) {
+                    croak.originalCroak.likes.isLoading = action.payload.isLoading
+                }
+                if (action.payload.id === croak.id) {
+                    croak.likes.isLoading = action.payload.isLoading
+                }
+            })
         },
 
-        toggleCommentsIsActive(state, action: PayloadAction<number>): void {
-            if (state.paginator) {
-                state.paginator.items.forEach(croak => {
-                    if (croak.id === action.payload) {
-                        croak.comments.isActive = !croak.comments.isActive
-                    }
-                })
-            }
-        },
-
-        toggleRepliesIsActive(state, action: PayloadAction<number>): void {
-            if (state.paginator) {
-                state.paginator.items.forEach(croak => {
-                    if (croak.id === action.payload) {
-                        croak.replies.isActive = !croak.replies.isActive
-                    }
-                })
-            }
+        /**
+         * Add updated fields of @param status to all croaks and original croaks
+         * with @param id if they present
+         * */
+        setLikesByCroakId(state, action: PayloadAction<{id: number, likes: IReactionDto}>): void {
+            state.paginator?.items.forEach(croak => {
+                if (action.payload.id === croak.originalCroak?.id && isICroak(croak.originalCroak)) {
+                    croak.originalCroak.likes = {...croak.originalCroak.likes, ...action.payload.likes}
+                }
+                if (action.payload.id === croak.id) {
+                    croak.likes = {...croak.likes, ...action.payload.likes}
+                }
+            })
         },
 
         garbleOriginalCroak(state, action: PayloadAction<ICroak>): void {
@@ -102,12 +103,12 @@ const croaksSlice = createSlice({
 export const croaksReducer = croaksSlice.reducer
 
 export const {
-    mergePaginator, toggleLikesIsActive, toggleCommentsIsActive,
-    toggleRepliesIsActive, setIsLoading, garbleOriginalCroak,
-    setOriginalCroakIsActive, tearDown
+    setIsLoading, mergePaginator, setLikesIsLoadingByCroakId,
+    setLikesByCroakId, garbleOriginalCroak, setOriginalCroakIsActive, tearDown
 } = croaksSlice.actions
 
 export const fetchNextCroaksByUserId = createAction<number>(`${croaksSlice.name}/fetchNextCroaksByUserId`)
 export const fetchNextRepliesByUserId = createAction<number>(`${croaksSlice.name}/fetchNextRepliesByUserId`)
 export const fetchNextLikesByUserId = createAction<number>(`${croaksSlice.name}/fetchNextLikesByUserId`)
 export const fetchOriginalCroakById = createAction<number>(`${croaksSlice.name}/fetchOriginalCroakById`)
+export const toggleLikesIsActiveByCroakId = createAction<number>(`${croaksSlice.name}/toggleLikesIsActiveByCroakId`)
