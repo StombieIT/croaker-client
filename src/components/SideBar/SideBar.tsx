@@ -1,7 +1,9 @@
 import { FC } from "react"
+import { useSelector } from "react-redux"
 import { SideBarLink } from "../SideBarLink/SideBarLink"
 import { Logo } from "../Logo/Logo"
 import { Button, ButtonSubType } from "../Button/Button"
+import { selectAuthUserId } from "../../business-logic/auth/authSelectors"
 
 import classes from "./SideBar.module.scss"
 
@@ -11,7 +13,11 @@ import exploreActiveIcon from "./explore/activeIcon.svg"
 import profileIcon from "./profile/icon.svg"
 import profileActiveIcon from "./profile/activeIcon.svg"
 
-export const SideBar: FC = () => {
+interface ISideBarProps {
+    userId?: number
+}
+
+export const SideBar: FC<ISideBarProps> = ({userId}) => {
     return <aside className={ classes.common }>
         <Logo className={ classes.logo } />
         <SideBarLink
@@ -21,7 +27,7 @@ export const SideBar: FC = () => {
             Explore
         </SideBarLink>
         <SideBarLink
-            to="/profile"
+            to={`/profile${userId ? `/${userId}/croaks` : ""}`}
             iconSrc={ isActive => isActive ? profileActiveIcon : profileIcon }
         >
             Profile
@@ -31,3 +37,13 @@ export const SideBar: FC = () => {
         </Button>
     </aside>
 }
+
+const SideBarContainer: FC = () => {
+    const userId: number | undefined = useSelector(selectAuthUserId)
+    
+    return <SideBar
+        userId={ userId }
+    />
+}
+
+export default SideBarContainer
