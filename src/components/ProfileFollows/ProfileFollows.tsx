@@ -1,9 +1,12 @@
 import { FC } from "react"
+import { useSelector } from "react-redux"
+import { SkeletonProfileFollows } from "./SkeletonProfileFollows"
+import { selectProfileFollows } from "../../business-logic/profile/profileSelectors"
 import { formatNumber } from "../../utils/formatNumber"
 
 import classes from "./ProfileFollows.module.scss"
 
-interface IProfileFollowsProps {
+export interface IProfileFollowsProps {
     followersCount: number,
     followingCount: number
 }
@@ -18,3 +21,17 @@ export const ProfileFollows: FC<IProfileFollowsProps> = ({followersCount, follow
         </div>
     </div>
 }
+
+const ProfileFollowsContainer: FC = () => {
+    const profileFollows: IProfileFollowsProps | undefined = useSelector(selectProfileFollows)
+
+    if (!profileFollows) {
+        return <SkeletonProfileFollows />
+    }
+
+    return <ProfileFollows
+        {...profileFollows}
+    />
+}
+
+export default ProfileFollowsContainer
