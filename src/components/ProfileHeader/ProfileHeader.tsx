@@ -1,15 +1,15 @@
 import { FC, MouseEvent } from "react"
 import { useNavigate } from "react-router-dom"
+import { SkeletonProfileHeader } from "./SkeletonProfileHeader"
+import { useSelector } from "react-redux"
+import { selectProfileHeader } from "../../business-logic/profile/profileSelectors"
 
 import classes from "./ProfileHeader.module.scss"
 import backIcon from "./backIcon.svg"
 
-interface IProfileHeaderContainerProps {
+interface IProfileHeaderProps {
     name: string,
-    croaksCount: number
-}
-
-interface IProfileHeaderProps extends IProfileHeaderContainerProps {
+    croaksCount: number,
     onBackButtonClick: () => void
 }
 
@@ -31,11 +31,16 @@ export const ProfileHeader: FC<IProfileHeaderProps> = ({name, croaksCount, onBac
     </header>
 }
 
-const ProfileHeaderContainer: FC<IProfileHeaderContainerProps> = props => {
+const ProfileHeaderContainer: FC = props => {
     const navigate = useNavigate()
+    const profileHeader = useSelector(selectProfileHeader)
+
+    if (!profileHeader) {
+        return <SkeletonProfileHeader />
+    }
 
     return <ProfileHeader
-        {...props}
+        {...profileHeader}
         onBackButtonClick={ () => navigate(-1) }
     />
 }
