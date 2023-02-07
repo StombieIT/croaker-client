@@ -1,11 +1,12 @@
 import { FC } from "react"
-
+import { useSelector } from "react-redux"
 import { DateJson } from "../../models/DateJson"
-
+import { formatDateToMonthAndYear } from "../../utils/formatDateToMonthAndYear"
+import { SkeletonProfileMeta } from "./SkeletonProfileMeta"
+import { selectProfileMeta } from "../../business-logic/profile/profileSelectors"
 import classes from "./ProfileMeta.module.scss"
 import locationIcon from "./locationIcon.svg"
 import calendarIcon from "./calendarIcon.svg"
-import { formatDateToMonthAndYear } from "../../utils/formatDateToMonthAndYear"
 
 interface IProfileMetaProps {
     userId: number,
@@ -46,3 +47,17 @@ export const ProfileMeta: FC<IProfileMetaProps> = ({
         </div>
     </div>
 }
+
+const ProfileMetaContainer: FC = () => {
+    const profileMeta = useSelector(selectProfileMeta)
+    
+    if (!profileMeta) {
+        return <SkeletonProfileMeta />
+    }
+
+    return <ProfileMeta
+        {...profileMeta}
+    />
+}
+
+export default ProfileMetaContainer
