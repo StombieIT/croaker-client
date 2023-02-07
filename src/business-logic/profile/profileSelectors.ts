@@ -13,11 +13,20 @@ export const selectProfileUser = (state: RootState): IUser | undefined => state.
 
 export const selectProfileFollow = (state: RootState): ILoadable & IActivable | undefined => state.profile.profile?.follow
 
-export const selectProfileFollows = createSelector(selectProfile, (profile) => {
+export const selectProfileFollows = createSelector(selectProfile, profile => {
     if (profile) {
         return {
             followersCount: profile.followersCount,
             followingCount: profile.followingCount
+        }
+    }
+})
+
+export const selectProfileHeader = createSelector(selectProfile, profile => {
+    if (profile) {
+        return {
+            name: profile.user.name,
+            croaksCount: profile.croaksCount
         }
     }
 })
