@@ -3,6 +3,11 @@
     align-items: center;
 }
 
+.button {
+    grid-area: bb;
+    background-color: transparent;
+}
+
 .header {
     display: grid;
 
@@ -15,12 +20,16 @@
 
     height: 80px;
 
-    .backButton {
-        grid-area: bb;
-
-        background-color: transparent;
-        
+    .backButton {      
+        @extend .button;  
         cursor: pointer;
+    }
+
+    .skeletonButton {
+        @extend .button;
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
 
     .name {
