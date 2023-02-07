@@ -1,5 +1,5 @@
 import { FC } from "react"
-import { Croak, ICroakProps } from "../Croak/Croak"
+import Croak, { ICroakProps } from "../Croak/Croak"
 import ReplyingFor from "../ReplyingFor/ReplyingFor"
 
 import classes from "./ReplyingCroak.module.scss"
