@@ -4,6 +4,7 @@ import { ICroakDto } from "../models/ICroakDto"
 import { IIdentifiable } from "../models/IIdentifiable"
 import { IPaginator } from "../models/IPaginator"
 import { PageableParamDefault } from "../models/PageableParamDefault"
+import { IReactionDto } from "../models/IReactionDto"
 
 export const getCroaksByUserId: GetPaginatorApiMethod<ICroakDto, IIdentifiable> = ({
     id,
@@ -31,4 +32,12 @@ export const getLikesByUserId: GetPaginatorApiMethod<ICroakDto, IIdentifiable> =
 
 export const getCroakById = (id: number): Promise<ICroakDto> =>
     api.get<ICroakDto>(`/croaks/${id}`)
+        .then(response => response.data)
+
+export const addLikeByCroakId = (id: number): Promise<IReactionDto> =>
+    api.post<IReactionDto>(`/croaks/add-like/${id}`)
+        .then(response => response.data)
+
+export const removeLikeByCroakId = (id: number): Promise<IReactionDto> =>
+    api.delete<IReactionDto>(`/croaks/remove-like/${id}`)
         .then(response => response.data)
