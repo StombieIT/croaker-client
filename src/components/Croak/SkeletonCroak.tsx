@@ -18,6 +18,7 @@ enum SkeletonCroakUnit {
     REACTION_HEIGHT = 15
 }
 
+// TODO: need to use semantic tags instead of div
 export const SkeletonCroak: FC = () => {
     return <div className={ classNames(classes.skeleton, classes.container) }>
         <SkeletonAvatar
