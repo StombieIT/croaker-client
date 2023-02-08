@@ -57,3 +57,11 @@ export const selectProfileUsername = createSelector(selectProfile, profile => {
         }
     }
 })
+
+export const selectProfileName = createSelector(selectProfile, profile => {
+    if (profile) {
+        return {
+            name: profile.user.name
+        }
+    }
+})
