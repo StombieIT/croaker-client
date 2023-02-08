@@ -7,7 +7,7 @@ import ProfileUsername from "../ProfileUsername/ProfileUsername"
 
 import classes from "./ProfileInfo.module.scss"
 
-export const ProfileInfo: FC = () => {
+const ProfileInfoContainer: FC = () => {
     return <div className={ classes.info }>
         <ProfileName />
         <ProfileUsername />
@@ -16,3 +16,5 @@ export const ProfileInfo: FC = () => {
         <ProfileFollows />
     </div>
 }
+
+export default ProfileInfoContainer
