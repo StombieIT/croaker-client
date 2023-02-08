@@ -65,3 +65,11 @@ export const selectProfileName = createSelector(selectProfile, profile => {
         }
     }
 })
+
+export const selectProfileBackground = createSelector(selectProfile, profile => {
+    if (profile) {
+        return {
+            imageLink: profile.backgroundImageLink
+        }
+    }
+})
