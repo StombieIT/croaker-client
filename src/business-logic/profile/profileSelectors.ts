@@ -41,3 +41,11 @@ export const selectProfileMeta = createSelector(selectProfile, profile => {
         }
     }
 })
+
+export const selectProfileDescription = createSelector(selectProfile, profile => {
+    if (profile) {
+        return {
+            description: profile.description
+        }
+    }
+})
