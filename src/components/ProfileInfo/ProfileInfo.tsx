@@ -3,6 +3,7 @@ import { IProfile } from "../../models/IProfile"
 import ProfileDescription from "../ProfileDescription/ProfileDescription"
 import ProfileFollows from "../ProfileFollows/ProfileFollows"
 import ProfileMeta from "../ProfileMeta/ProfileMeta"
+import ProfileUsername from "../ProfileUsername/ProfileUsername"
 import { Username } from "../Username/Username"
 
 import classes from "./ProfileInfo.module.scss"
@@ -16,9 +17,7 @@ export const ProfileInfo: FC<IProfileInfoProps> = ({profile}) => {
         <h4 className={ classes.name }>
             { profile.user.name }
         </h4>
-        <Username>
-            { profile.user.username }
-        </Username>
+        <ProfileUsername />
         <ProfileDescription />
         <ProfileMeta />
         <ProfileFollows />
