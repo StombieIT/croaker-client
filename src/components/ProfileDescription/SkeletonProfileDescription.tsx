@@ -1,10 +1,11 @@
 import { FC } from "react"
 import Skeleton from "react-loading-skeleton"
-
-// import classes from "./SkeletonProfileDescription.module.css"
+import { OrdinaryParagraph } from "../OrdinaryParagraph/OrdinaryParagraph"
 
 export const SkeletonProfileDescription: FC = () => {
-    return <Skeleton
-        count={ 3 }
-    />
+    return <OrdinaryParagraph>
+        <Skeleton />
+        <Skeleton width={ 450 } />
+        <Skeleton width={ 500 } />
+    </OrdinaryParagraph>
 }
