@@ -1,8 +1,8 @@
 import { FC } from "react"
 import { IProfile } from "../../models/IProfile"
-import { OrdinaryParagraph } from "../OrdinaryParagraph/OrdinaryParagraph"
+import ProfileDescription from "../ProfileDescription/ProfileDescription"
 import ProfileFollows from "../ProfileFollows/ProfileFollows"
-import { ProfileMeta } from "../ProfileMeta/ProfileMeta"
+import ProfileMeta from "../ProfileMeta/ProfileMeta"
 import { Username } from "../Username/Username"
 
 import classes from "./ProfileInfo.module.scss"
@@ -19,15 +19,8 @@ export const ProfileInfo: FC<IProfileInfoProps> = ({profile}) => {
         <Username>
             { profile.user.username }
         </Username>
-        <OrdinaryParagraph>
-            { profile.description ?? undefined }
-        </OrdinaryParagraph>
-        <ProfileMeta
-            userId={ profile.user.id }
-            city={ profile.city }
-            country={ profile.country }
-            registrationDate={ profile.user.registrationDate }
-        />
+        <ProfileDescription />
+        <ProfileMeta />
         <ProfileFollows />
     </div>
 }
