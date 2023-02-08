@@ -5,12 +5,12 @@ import { useDispatch, useSelector } from "react-redux"
 import { selectProfileState } from "../../business-logic/profile/profileSelectors"
 import { fetchFullProfileById, IProfileState, tearDown } from "../../business-logic/profile/profileSlice"
 import { AppDispatch } from "../../store"
-import { ImageWrapper, ImageWrapperType } from "../ImageWrapper/ImageWrapper"
 import ProfileInteractionBar from "../ProfileInteractionBar/ProfileInteractionBar"
-import { ProfileInfo } from "../ProfileInfo/ProfileInfo"
+import ProfileInfo from "../ProfileInfo/ProfileInfo"
 import { NavBar } from "../NavBar/NavBar"
 import { PreLoader } from "../PreLoader/PreLoader"
 import ProfileHeader from "../ProfileHeader/ProfileHeader"
+import ProfileBackground from "../ProfileBackground/ProfileBackground"
 
 import classes from "./ProfileLayout.module.scss"
 
@@ -24,24 +24,14 @@ export const ProfileLayout: FC<IProfileLayoutProps> = ({state}) => {
     }
     
     return <main className={ classes.container }>
-        <ProfileHeader
-            name={ state.profile.user.name }
-            croaksCount={ state.profile.croaksCount }
-        />
-        <ImageWrapper
-            type={ ImageWrapperType.VERTICAL }
-            src={ state.profile.backgroundImageLink ?? undefined }
-            alt={ state.profile.backgroundImageLink ?? "background image" }
-            className={ classes.backgroundImage }
-        />
+        <ProfileHeader />
+        <ProfileBackground />
         <div className={ classes.content }>
             <ProfileInteractionBar
                 user={ state.profile.user }
                 follow={ state.profile.follow }
             />
-            <ProfileInfo
-                profile={ state.profile }
-            />
+            <ProfileInfo />
         </div>
         <NavBar className={ classes.navbar }>
             <NavLink to={`/profile/${state.profile.user.id}/croaks`}>
