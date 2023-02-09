@@ -18,7 +18,7 @@ const ProfileUsernameContainer: FC = () => {
     const profileUsername = useSelector(selectProfileUser)
     
     if (!profileUsername) {
-        return <SkeletonUsername width={ 70 } />
+        return <SkeletonUsername width={ 70 } height={ 15 } />
     }
 
     return <ProfileUsername
