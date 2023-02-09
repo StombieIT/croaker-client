@@ -1,3 +1,5 @@
+@use "../../constants";
+
 .container {
     display: flex;
     align-items: center;
@@ -11,4 +13,8 @@
     .bold {
         font-weight: 600;
     }
+}
+
+.skeleton {
+    gap: constants.$skeletonGap;
 }

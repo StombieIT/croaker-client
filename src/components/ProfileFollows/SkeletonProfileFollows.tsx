@@ -1,4 +1,5 @@
 import { FC } from "react"
+import classNames from "classnames"
 import Skeleton from "react-loading-skeleton"
 
 import classes from "./ProfileFollows.module.scss"
@@ -10,7 +11,7 @@ enum SkeletonProfileFollowsUnit {
 }
 
 export const SkeletonProfileFollows: FC = () => {
-    return <div className={ classes.container }>
+    return <div className={ classNames(classes.container, classes.skeleton) }>
         <div className={ classes.element }>
             <Skeleton
                 width={ SkeletonProfileFollowsUnit.FOLLOWERS_WIDTH }
