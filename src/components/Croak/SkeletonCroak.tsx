@@ -7,7 +7,6 @@ import { MediaGrid } from "../MediaGrid/MediaGrid"
 import classes from "./Croak.module.scss"
 
 enum SkeletonCroakUnit {
-    AVATAR_SIZE = 47,
     NAME_WIDTH = 90,
     USERNAME_WIDTH = 60,
     PASSED_TIME_WIDTH = 30,
@@ -22,8 +21,8 @@ enum SkeletonCroakUnit {
 export const SkeletonCroak: FC = () => {
     return <div className={ classNames(classes.skeleton, classes.container) }>
         <SkeletonAvatar
-            size={ SkeletonCroakUnit.AVATAR_SIZE }
             className={ classes.avatarWrapper }
+            size={ 47 }
         />
         <div className={ classes.content }>
             <div className={ classes.header }>

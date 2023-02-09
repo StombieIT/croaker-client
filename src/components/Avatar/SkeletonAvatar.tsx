@@ -2,12 +2,26 @@ import { FC } from "react"
 import Skeleton from "react-loading-skeleton"
 
 interface ISkeletonAvatarProps {
-    size: number,
-    className?: string
+    className: string,
+    size?: number
 }
 
-export const SkeletonAvatar: FC<ISkeletonAvatarProps> = ({size, className}) => {
-    return <div className={ className }>
-        <Skeleton circle width={size} height={size} />
-    </div>
+export const SkeletonAvatar: FC<ISkeletonAvatarProps> = ({
+    className,
+    size
+}) => {
+    if (size) {
+        return <div className={ className }>
+            <Skeleton
+                width={ size }
+                height={ size }
+                circle 
+            />
+        </div>
+    }
+
+    return <Skeleton
+        className={ className }
+        circle
+    />
 }
