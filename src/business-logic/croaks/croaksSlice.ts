@@ -1,5 +1,5 @@
 import { createAction, createSlice, PayloadAction } from "@reduxjs/toolkit"
-import { WritableDraft } from "immer/dist/internal"
+import { garble } from "../../utils/garble"
 import { IReactionDto } from "../../models/IReactionDto"
 import { ICroak, isICroak } from "../../models/ICroak"
 import { IPaginator } from "../../models/IPaginator"
@@ -11,18 +11,6 @@ export interface ICroaksState {
 
 const initialState: ICroaksState = {
     isLoading: true
-}
-
-const garble = (state: WritableDraft<ICroaksState>, newOriginalCroak: ICroak) => {
-    const {originalCroak, ...originalCroakCutted} = newOriginalCroak
-    state.paginator
-        ?.items
-        .filter(croak => croak.originalCroak?.id === originalCroakCutted.id)
-        .forEach(croak => {
-            if (croak.originalCroak) {
-                croak.originalCroak = {...croak.originalCroak, ...originalCroakCutted}
-            }
-        })
 }
 
 const croaksSlice = createSlice({
@@ -46,7 +34,7 @@ const croaksSlice = createSlice({
             } else {
                 state.paginator = action.payload
             }
-            state.paginator.items.forEach(croak => garble(state, croak))
+            state.paginator.items.forEach(croak => garble(state.paginator, croak))
         },
 
         /**
@@ -80,7 +68,7 @@ const croaksSlice = createSlice({
         },
 
         garbleOriginalCroak(state, action: PayloadAction<ICroak>): void {
-            garble(state, action.payload)
+            garble(state.paginator, action.payload)
         },
 
         setOriginalCroakIsActive(state, action: PayloadAction<{croakId: number, isActive: boolean}>): void {
