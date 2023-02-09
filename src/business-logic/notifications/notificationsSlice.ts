@@ -2,6 +2,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 import { v4 } from "uuid"
 import { INotification } from "../../models/INotification"
 import { INotificationContainer } from "../../models/INotificationContainer"
+import { appendLimittedNotification } from "../../utils/appendLimittedNotification"
 
 export interface INotificationsState {
     list: Array<INotification>
@@ -16,11 +17,11 @@ const notificationsSlice = createSlice({
     initialState,
     reducers: {
         appendNotificationContainer: (state, action: PayloadAction<INotificationContainer>): void => {
-            state.list.push({...action.payload, id: v4()})
+            appendLimittedNotification(state.list, {...action.payload, id: v4()})
         },
 
         appendNotification: (state, action: PayloadAction<INotification>): void => {
-            state.list.push(action.payload)
+            appendLimittedNotification(state.list, action.payload)
         },
 
         removeNotification: (state, action: PayloadAction<string>): void => {
