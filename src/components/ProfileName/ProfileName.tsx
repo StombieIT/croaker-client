@@ -16,15 +16,15 @@ export const ProfileName: FC<IProfileNameProps> = ({name}) => {
 }
 
 export const ProfileNameContainer: FC = () => {
-    // const profileName = useSelector(selectProfileName)
+    const profileName = useSelector(selectProfileName)
 
-    // if (!profileName) {
+    if (!profileName) {
         return <SkeletonProfileName />
-    // }
+    }
 
-    // return <ProfileName
-    //     {...profileName}
-    // />
+    return <ProfileName
+        {...profileName}
+    />
 }
 
 export default ProfileNameContainer

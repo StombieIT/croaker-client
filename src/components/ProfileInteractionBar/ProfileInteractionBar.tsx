@@ -1,36 +1,42 @@
-import { FC } from "react"
-import { useDispatch } from "react-redux"
+import { FC, MouseEvent } from "react"
+import { useDispatch, useSelector } from "react-redux"
+import { selectProfileInteractive } from "../../business-logic/profile/profileSelectors"
 import { toggleProfileFollowIsActive } from "../../business-logic/profile/profileSlice"
 import { IActivable } from "../../models/IActivable"
 import { ILoadable } from "../../models/ILoadable"
-import { IUser } from "../../models/IUser"
 import { AppDispatch } from "../../store"
 import { Avatar } from "../Avatar/Avatar"
 import { Button, ButtonSubType } from "../Button/Button"
+import { SkeletonProfileInteractionBar } from "./SkeletonProfileInteractionBar"
 
 import classes from "./ProfileInteractionBar.module.scss"
 
-interface IProfileInteractionBarContainerProps {
-    user: IUser,
-    follow: ILoadable & IActivable
+interface IProfileInteractionBarProps {
+    username: string,
+    avatarLink: string | null,
+    follow: ILoadable & IActivable,
+    toggleFollowIsActive?: () => void
 }
 
-interface IProfileInteractionBarProps extends IProfileInteractionBarContainerProps {
-    toggleFollowIsActive: () => void
-}
-
-export const ProfileInteractionBar: FC<IProfileInteractionBarProps> = ({user, follow, toggleFollowIsActive}) => {
+export const ProfileInteractionBar: FC<IProfileInteractionBarProps> = ({username, avatarLink, follow, toggleFollowIsActive}) => {
+    const onButtonClick = (evt: MouseEvent<HTMLButtonElement>) => {
+        evt.preventDefault()
+        if (toggleFollowIsActive) {
+            toggleFollowIsActive()
+        }
+    }
+    
     return <div className={ classes.bar }>
         <Avatar
             className={ classes.avatar }
-            src={ user.avatarLink ?? undefined }
-            alt={ `${user.username} avatar` }
+            src={ avatarLink ?? undefined }
+            alt={ `${username} avatar` }
         />
         <Button
             className={ classes.button }
             subType={ ButtonSubType.PRIMARY }
             disabled={ follow.isLoading }
-            onClick={ toggleFollowIsActive }
+            onClick={ onButtonClick }
         >
             {
                 follow.isActive
@@ -41,11 +47,16 @@ export const ProfileInteractionBar: FC<IProfileInteractionBarProps> = ({user, fo
     </div>
 }
 
-export const ProfileInteractionBarContainer: FC<IProfileInteractionBarContainerProps> = props => {
+export const ProfileInteractionBarContainer: FC = () => {
     const dispatch: AppDispatch = useDispatch()
+    const profileInteractive = useSelector(selectProfileInteractive)
+
+    if (!profileInteractive) {
+        return <SkeletonProfileInteractionBar />
+    }
 
     return <ProfileInteractionBar
-        {...props}
+        {...profileInteractive}
         toggleFollowIsActive={ () => dispatch(toggleProfileFollowIsActive()) }
     />
 }

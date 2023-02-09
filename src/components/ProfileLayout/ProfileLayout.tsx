@@ -8,39 +8,31 @@ import { AppDispatch } from "../../store"
 import ProfileInteractionBar from "../ProfileInteractionBar/ProfileInteractionBar"
 import ProfileInfo from "../ProfileInfo/ProfileInfo"
 import { NavBar } from "../NavBar/NavBar"
-import { PreLoader } from "../PreLoader/PreLoader"
 import ProfileHeader from "../ProfileHeader/ProfileHeader"
 import ProfileBackground from "../ProfileBackground/ProfileBackground"
 
 import classes from "./ProfileLayout.module.scss"
 
 interface IProfileLayoutProps {
-    state: IProfileState
+    userId: number
 }
 
-export const ProfileLayout: FC<IProfileLayoutProps> = ({state}) => {
-    if (state.isLoading || !state.profile) {
-        return <PreLoader />
-    }
-    
+export const ProfileLayout: FC<IProfileLayoutProps> = ({userId}) => {
     return <main className={ classes.container }>
         <ProfileHeader />
         <ProfileBackground />
         <div className={ classes.content }>
-            <ProfileInteractionBar
-                user={ state.profile.user }
-                follow={ state.profile.follow }
-            />
+            <ProfileInteractionBar />
             <ProfileInfo />
         </div>
         <NavBar className={ classes.navbar }>
-            <NavLink to={`/profile/${state.profile.user.id}/croaks`}>
+            <NavLink to={`/profile/${userId}/croaks`}>
                 Croaks
             </NavLink>
-            <NavLink to={`/profile/${state.profile.user.id}/replies`}>
+            <NavLink to={`/profile/${userId}/replies`}>
                 Replies
             </NavLink>
-            <NavLink to={`/profile/${state.profile.user.id}/likes`}>
+            <NavLink to={`/profile/${userId}/likes`}>
                 Likes
             </NavLink>
         </NavBar>
@@ -73,7 +65,7 @@ const ProfileLayoutContainer: FC = () => {
     }
 
     return <ProfileLayout
-        state={ state }
+        userId={ parsedId }
     />
 }
 
