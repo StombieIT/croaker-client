@@ -6,6 +6,8 @@ import { AppDispatch, RootState } from "../store"
 import { ICroaksProps } from "../components/Croaks/Croaks"
 import { ICroaksState } from "../business-logic/croaks/croaksSlice"
 
+const EXTRA_ZONE_COEFFICIENT = 1.05
+
 export const croaksContainer = (
     selectCroaksState: (state: RootState) => ICroaksState,
     fetchCroaksByUserId: PayloadActionCreator<number>,
@@ -19,6 +21,7 @@ export const croaksContainer = (
         parsedId = parseInt(id)
     }
 
+    const state = useSelector(selectCroaksState)
     const dispatch: AppDispatch = useDispatch()
 
     useEffect(() => {
@@ -31,7 +34,27 @@ export const croaksContainer = (
         }
     }, [parsedId])
 
-    const state = useSelector(selectCroaksState)
+    useEffect(() => {
+        const documentElement = document.documentElement
+        const onDocumentElementScroll = parsedId && !state.isLoading && state.paginator?.hasNextPage
+            ? () => {
+                if (parsedId && documentElement.scrollHeight - documentElement.scrollTop < documentElement.clientHeight * EXTRA_ZONE_COEFFICIENT) {
+                    dispatch(fetchCroaksByUserId(parsedId))
+                }
+            }
+            : undefined
+
+        if (onDocumentElementScroll) {
+            document.addEventListener("scroll", onDocumentElementScroll)
+        }
+
+        return () => {
+            if (onDocumentElementScroll) {
+                document.removeEventListener("scroll", onDocumentElementScroll)
+            }
+        }
+    }, [parsedId, state.paginator?.hasNextPage, state.isLoading])
+
 
     if (!parsedId) {
         return <Navigate to="/error/404" />

@@ -14,9 +14,15 @@ export interface ICroaksProps {
 export const Croaks: FC<ICroaksProps> = ({state}) => {
     return <div className={ classes.container }>
         {
+            state.paginator
+            ? state.paginator.items.map(croak => <ReplyingCroak key={ croak.id } croak={ croak } />)
+            : null
+        }
+        {
             state.isLoading || !state.paginator
-            ? Array.from({length: 3}).map((element, idx) => <SkeletonReplyingCroak key={ idx } />)
-            : state.paginator.items.map(croak => <ReplyingCroak key={ croak.id } croak={ croak } />)
+            ? Array.from({length: 3})
+                .map((element, idx) => <SkeletonReplyingCroak key={ idx } />)
+            : null
         }
     </div>
 }
