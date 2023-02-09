@@ -1,4 +1,4 @@
-import { select, call, put, takeLatest, takeLeading } from "@redux-saga/core/effects"
+import { select, call, put, takeLeading } from "@redux-saga/core/effects"
 import { PayloadAction } from "@reduxjs/toolkit"
 import { IPaginator } from "../../models/IPaginator"
 import { fromDto, ICroak } from "../../models/ICroak"
@@ -19,9 +19,9 @@ import * as croaksApi from "../../api/croaksApi"
 import { IReactionDto } from "../../models/IReactionDto"
 
 export function *croaksWatcher() {
-    yield takeLatest(fetchNextCroaksByUserId.type, fetchNextCroaksByUserIdWorker)
-    yield takeLatest(fetchNextRepliesByUserId.type, fetchNextRepliesByUserIdWorker)
-    yield takeLatest(fetchNextLikesByUserId.type, fetchNextLikesByUserIdWorker)
+    yield takeLeading(fetchNextCroaksByUserId.type, fetchNextCroaksByUserIdWorker)
+    yield takeLeading(fetchNextRepliesByUserId.type, fetchNextRepliesByUserIdWorker)
+    yield takeLeading(fetchNextLikesByUserId.type, fetchNextLikesByUserIdWorker)
     yield takeLeading(fetchOriginalCroakById.type, fetchOriginalCroakByIdWorker)
     yield takeLeading(toggleLikesIsActiveByCroakId.type, toggleLikesIsActiveByCroakIdWorker)
 }
