@@ -73,3 +73,13 @@ export const selectProfileBackground = createSelector(selectProfile, profile => 
         }
     }
 })
+
+export const selectProfileInteractive = createSelector(selectProfile, profile => {
+    if (profile) {
+        return {
+            avatarLink: profile.user.avatarLink,
+            username: profile.user.username,
+            follow: profile.follow
+        }
+    }
+})
