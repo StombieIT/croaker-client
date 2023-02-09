@@ -2,5 +2,6 @@ import { NotificationType } from "./NotificationType"
 
 export interface INotificationContainer {
     text: string,
-    type: NotificationType
+    type: NotificationType,
+    lifetime?: number
 }
